@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="787f5a8b-aa6a-4351-b310-6a758ba2cf99" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/release.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/nexp-cli.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/app/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/auth/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/config/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/file/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/notification/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/role/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/shared/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/domains/user/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/indexFiles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/packagejson.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/src/root.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Domain/Entities/Base.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Domain/Exceptions/InvalidPasswordException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Domain/Exceptions/UniqueAttributeException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Domain/Services/UniqueService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Domain/UseCases/GetLogViewUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Domain/ValueObjects/Password.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/Repositories/BaseMikroSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/Repositories/BaseMongoRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/Repositories/BaseSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/Repositories/RedisCacheRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/ValueObjectsMapping/PasswordType.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/templates/emails/auth/forgotPassword.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/templates/emails/auth/register.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Infrastructure/templates/emails/auth/verifiedAccount.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IApp.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IAppConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IBaseAttributes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IBaseDomain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IBaseRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IByOptions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IId.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IKind.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/ILocaleMessage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/ITimestamps.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/InterfaceAdapters/IUniqueConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Commands/CreateFolderLogger.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Commands/SeedCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Commands/sincronizeMikroORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Exceptions/DuplicateEntityHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Exceptions/RouteNotFoundHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Factories/AppFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Handlers/Express/IndexHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Handlers/Express/LogHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Handlers/Koa/IndexHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Middlewares/Express/RedirectRouteNotFoundMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Middlewares/Express/Throttle.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Middlewares/Koa/RedirectRouteNotFoundMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Middlewares/Koa/Throttle.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Requests/IdRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Requests/RequestCriteria.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/ErrorExceptionMapper.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/ErrorHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/ExceptionFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Express/AppExpress.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Express/ErrorHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Express/Responder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/FormatError.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/FormatResponder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Koa/AppKoa.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Koa/ErrorHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Koa/Responder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Locales.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/MikroPaginator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/MongoPaginator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Pagination.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/Paginator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/ValidationModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Shared/ValidatorRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Transformers/DefaultTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Views/Layouts/main.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Presentation/Views/log.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Tests/Express/WhiteListHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Tests/Koa/WhiteListHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Tests/index.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/App/Tests/whiteList.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Entities/Token.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Exceptions/BadCredentialsException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Exceptions/CantDisabledException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Exceptions/PasswordWrongException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Exceptions/WrongPermissionsException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Services/AuthService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Types/Auth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/Types/TypeAuth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/ChangeForgotPasswordUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/ForgotPasswordUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/GetTokenUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/LoginUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/LogoutUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/PermissionUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/RefreshTokenUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/RegisterUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/SetTokenBlacklistUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/SyncRolesPermissionUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/UpdateMeUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/VerifyTokenBlacklistUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Domain/UseCases/VerifyYourAccountUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Repositories/TokenMikroSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Repositories/TokenMongoRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Repositories/TokenRedisRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Repositories/TokenSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Schemas/TokenMikroORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Schemas/TokenMongoose.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Schemas/TokenTypeORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/IGroupPermission.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/IToken.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/ITokenDocument.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/ITokenDomain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/Payloads/AuthPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/Payloads/ChangeForgotPasswordPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/Payloads/ForgotPasswordPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/Payloads/RefreshTokenPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/Payloads/RegisterPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/InterfaceAdapters/Payloads/VerifyYourAccountPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Commands/SyncRolesPermissionCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Controllers/AuthController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Exceptions/ForbiddenHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Exceptions/TokenBlackListedHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Exceptions/TokenExpiredHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Exceptions/TokenNotFoundHttpException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Handlers/Express/AuthHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Handlers/Koa/AuthHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Helpers/AuthUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Express/AuthenticationMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Express/AuthorizeMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Express/RefreshTokenMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Express/VerifyTokenMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Koa/AuthenticationMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Koa/AuthorizeMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Koa/RefreshTokenMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Middlewares/Koa/VerifyTokenMiddleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/AuthRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/ChangeForgotPasswordRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/ForgotPasswordRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/RefreshTokenRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/RegisterRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/UpdateMeRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Requests/VerifyYourAccountRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Transformers/AuthTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Presentation/Transformers/PermissionsTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Shared/JWTToken.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Tests/forgotPassword.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Tests/keepAlive.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Tests/login.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Tests/permission.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Auth/Tests/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Injects/factories.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Injects/repositories.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Injects/services.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Injects/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Locales/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Locales/es.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Permissions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/Roles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/mainConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Config/validateEnv.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/Entities/File.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/Services/FileService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/CreateBucketUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/DownloadUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/GetFileMetadataUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/GetPresignedGetObjectUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/ListFilesUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/ListObjectsUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/RemoveFileUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/UpdateFileBase64UseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/UpdateFileMultipartUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/UploadBase64UseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Domain/UseCases/UploadMultipartUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Infrastructure/Repositories/FileMikroSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Infrastructure/Repositories/FileMongoRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Infrastructure/Repositories/FileSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Infrastructure/Schemas/FileMikroORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Infrastructure/Schemas/FileMongoose.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Infrastructure/Schemas/FileTypeORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/IFileDocument.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/IFileDomain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/IFileDomainDto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/IFileRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/IFileTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/CreateBucketPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/FileBase64RepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/FileDTO.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/FileMultipartRepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/FileRepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/FileUpdateBase64Payload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/FileUpdateMultipartPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/IFileDTO.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/ListObjectsPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/InterfaceAdapters/Payloads/PresignedFileRepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Commands/CreateBucketCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Commands/CreateVapID.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Controllers/FileController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Criterias/FileFilter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Criterias/FileSort.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Handlers/Express/FileHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Handlers/Koa/FileHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Middlewares/Express/FileReqMulter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Middlewares/Koa/FileReqMulter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/CreateBucketCommandRepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/FileBase64RepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/FileMultipartRepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/FileRequestCriteria.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/FileUpdateBase64Request.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/FileUpdateMultipartRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/ListObjectsRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Requests/PresignedFileRepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Transformers/FileTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Presentation/Transformers/ObjectTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Tests/MockMinioStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Tests/file.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Tests/fixture.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/File/Tests/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Entities/EmailNotification.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Entities/Notification.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Entities/PushNotification.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Entities/TypeNotification.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Enum/StatusNotificationEnum.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Enum/TypeNotificationEnum.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Services/AttachmentsFilesService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Services/NotificationService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/Services/SendEmailService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/UseCases/CreateSubscriptionUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Domain/UseCases/SendPushNotificationUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Infrastructure/Repositories/NotificationMongoRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Infrastructure/Schemas/NotificationMongoose.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Infrastructure/Schemas/NotificationTypeORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/IEmailNotificationData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/IFilesAttachments.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/INotificationDocument.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/INotificationDomain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/INotificationRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/INotificationResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/ISendEmailParams.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/Payloads/NotificationRepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/InterfaceAdapters/Payloads/NotificationSendMessagePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Controller/NotificationController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Criterias/NotificationFilter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Criterias/NotificationSort.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Handlers/Express/NotificationHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Handlers/Koa/NotificationHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Requests/NotificationCreateSuscriptionRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Presentation/Requests/NotificationSendMessageRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Shared/EmailStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Shared/INotificationFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Shared/INotifierStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Shared/NotificationFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Shared/WebPushStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Tests/MockNotificationFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Notification/Tests/MockStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/Entities/Role.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/Exceptions/RoleDisabledException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/Exceptions/RoleOfSystemNotDeletedException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/Services/RoleService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/UseCases/GetRoleUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/UseCases/ListRolesUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/UseCases/RemoveRoleUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/UseCases/SaveRoleUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Domain/UseCases/UpdateRoleUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Infrastructure/Repositories/RoleMikroSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Infrastructure/Repositories/RoleMongoRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Infrastructure/Repositories/RoleSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Infrastructure/Schemas/RoleMikroORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Infrastructure/Schemas/RoleMongoose.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Infrastructure/Schemas/RoleTypeORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/InterfaceAdapters/IRoleDocument.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/InterfaceAdapters/IRoleDomain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/InterfaceAdapters/IRoleRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/InterfaceAdapters/IRoleTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/InterfaceAdapters/Payloads/RoleRepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/InterfaceAdapters/Payloads/RoleUpdatePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Commands/AddRoleCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Controllers/RoleController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Criterias/RoleFilter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Criterias/RoleSort.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Handlers/Express/RoleHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Handlers/Koa/RoleHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Requests/RoleRepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Requests/RoleRequestCriteria.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Requests/RoleUpdateRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Requests/RoleUserCommandRepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Transformers/RoleTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Presentation/Transformers/RoleUserTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Tests/role.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Role/Tests/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Crons/Cron.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Crons/TestCron.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Database/MikroORMCreateConnection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Database/MongooseCreateConnection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Database/TypeORMCreateConnection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Decorators/ContainerFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Decorators/match.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Encryption/BcryptEncryptionStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Encryption/Md5EncryptionStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Events/EventHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Events/ForgotPasswordEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Events/RegisterEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Events/SendMessageEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Events/UserCreatedEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Events/VerifiedAccountEvent.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Exceptions/DecryptForbiddenException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Exceptions/NotFoundException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/AxiosFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/CacheFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/ContainerFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/CronFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/DatabaseFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/EncryptionFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/EntityManagerFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/FilesystemFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/InjectionFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/SeedFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Factories/TokenFactory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Filesystem/MinioStrategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/IFormatResponder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/IPaginatorConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/ISeed.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/ITokenDecode.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/IdPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/Tests/IBodyResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/Tests/IClassValidatorErrorResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/Tests/IFetchResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/Tests/ILogin.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/InterfaceAdapters/Tests/IPaginatorTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/Shared/Logger/Logger.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/Entities/User.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/Exceptions/UnverifiedUserException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/Exceptions/UserDisabledException.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/Services/UserService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/ActiveUserUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/AssignRoleBySlugUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/AssignRoleUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/ChangeMyPasswordUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/ChangeUserPasswordUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/GetUserUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/ListUsersUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/RemoveUserUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/SaveUserUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Domain/UseCases/UpdateUserUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Repositories/UserMikroSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Repositories/UserMongoRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Repositories/UserSqlRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Schemas/UserMikroORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Schemas/UserMongoose.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Schemas/UserTypeORM.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Infrastructure/Seeds/UserSeed.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/IUserDocument.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/IUserDomain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/IUserMinimalDataTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/IUserRepository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/IUserTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/ChangeMyPasswordPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/ChangeUserPasswordPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/CheckUserRolePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserActivePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserAssignRoleBySlug.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserAssignRolePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserPasswordPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserRepPayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserSavePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/InterfaceAdapters/Payloads/UserUpdatePayload.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Commands/ActiveUserCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Commands/AddUserCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Commands/AddUserRoleCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Commands/AssingRoleToUserCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Controllers/UserControllers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Criterias/UserFilter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Criterias/UserSort.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Handlers/Express/UserHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Handlers/Koa/UserHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/ChangeMyPasswordRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/ChangeUserPasswordRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserAssignRoleByCommandRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserAssignRoleRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserCommandSaveRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserRepPasswordRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserRepRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserRequestCriteria.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserSaveRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserUpdateRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Requests/UserWithoutPermissionsRequest.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Transformers/UserMinimalDataTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Presentation/Transformers/UserTransformer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Tests/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/domains/User/Tests/user.handler.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/command.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/crons.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/exceptions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/initCommand.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/initTestServer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/inversify.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/seed.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/indexFiles/serviceIdentifier.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.commitlintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.env.dev" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.husky/_/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.husky/_/husky.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.husky/commit-msg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.husky/pre-commit" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.huskyrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.parcelrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/DebugerDockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/config/custom-environment-variables.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/config/development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/config/production.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/config/test.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/debug.build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/dev.build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/dev.init.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/docker-compose.debug.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/docker/mongo/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/docker/postgres/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/ecosystem.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/firewall.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/instance.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/provider.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/script.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/vars.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/infrastructure/versions.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/jest-mongodb-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/lint-staged.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/prod.build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/tools/hooks/commit-msg.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/app/templates/root/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23tMxgHnfBVMNzOblwZ0il1hN5g" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/generators/app/src/indexFiles" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v16.12.0/bin/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/generators/app/src/domains/auth" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/generators/app/src/indexFiles" />
+      <recent name="$PROJECT_DIR$/generators/app/src/domains" />
+      <recent name="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Schemas" />
+      <recent name="$PROJECT_DIR$/generators/app/templates/domains/Auth/Infrastructure/Repositories" />
+      <recent name="$PROJECT_DIR$/generators/app/src/domains/app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/generators/app/templates" />
+      <recent name="$PROJECT_DIR$/generators/app/templates/root" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="787f5a8b-aa6a-4351-b310-6a758ba2cf99" name="Changes" comment="" />
+      <created>1642549178943</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642549178943</updated>
+      <workItem from="1642549180505" duration="15256000" />
+      <workItem from="1642605488430" duration="17097000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
