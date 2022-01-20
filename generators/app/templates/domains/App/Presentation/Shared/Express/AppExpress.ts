@@ -12,8 +12,8 @@ import '../../Handlers/Express/IndexHandler';
 import '../../../../Item/Presentation/Handlers/Express/ItemHandler';
 import '../../../../User/Presentation/Handlers/Express/UserHandler';
 import '../../../../Auth/Presentation/Handlers/Express/AuthHandler';
-import '../../../../Role/Presentation/Handlers/Express/RoleHandler';
-import '../../../../File/Presentation/Handlers/Express/FileHandler';
+import '../../../../Role/Presentation/Handlers/Express/RoleHandler';<% if (fileDomain) { %>
+import '../../../../File/Presentation/Handlers/Express/FileHandler';<% } %>
 import '../../../../Notification/Presentation/Handlers/Express/NotificationHandler';
 import '../../Handlers/Express/LogHandler';
 
@@ -26,10 +26,9 @@ import container from '../../../../inversify.config';
 import IApp from '../../../InterfaceAdapters/IApp';
 import Locales from '../Locales';
 import IAppConfig from '../../../InterfaceAdapters/IAppConfig';
-import Logger from '../../../../Shared/Logger/Logger';
-import MainConfig from '../../../../Config/mainConfig';
+import Logger from '../../../../Shared/Logger/Logger';<% if (orm == "MikroORM") { %>
 import { RequestContext } from '@mikro-orm/core';
-import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';
+import { orm as mikroORM } from '../../../../Shared/Database/MikroORMCreateConnection';<% } %>
 
 class AppExpress implements IApp
 {
@@ -69,15 +68,12 @@ class AppExpress implements IApp
                 layoutsDir: `${this.config.viewRouteEngine}/Layouts`,
                 partialsDir: `${this.config.viewRouteEngine}/Partials`
             }));
-            app.set('view engine', '.hbs');
+            app.set('view engine', '.hbs'); <% if (orm == "MikroORM") { %>
 
-            if (MainConfig.getInstance().getConfig().dbConfig.default === 'MikroORM')
+            app.use((req, res, next) =>
             {
-                app.use((req, res, next) =>
-                {
-                    RequestContext.create(orm.em, next);
-                });
-            }
+                RequestContext.create(mikroORM.em, next);
+            });<% } %>
 
             app.use(pinoExpress(Logger));
             app.use('/api/', Throttle);

@@ -3,17 +3,14 @@ import MainConfig from '../../Config/mainConfig';
 import { ICreateConnection } from '@digichanges/shared-experience';
 
 import IUserDocument from '../../User/InterfaceAdapters/IUserDocument';
-import IRoleDocument from '../../Role/InterfaceAdapters/IRoleDocument';
-import IItemDocument from '../../Item/InterfaceAdapters/IItemDocument';
-import IFileDocument from '../../File/InterfaceAdapters/IFileDocument';
+import IRoleDocument from '../../Role/InterfaceAdapters/IRoleDocument';<% if (fileDomain) { %>
+import IFileDocument from '../../File/InterfaceAdapters/IFileDocument';<% } %>
 import INotificationDocument from '../../Notification/InterfaceAdapters/INotificationDocument';
 import ITokenDocument from '../../Auth/InterfaceAdapters/ITokenDocument';
 
-import ItemSchema from '../../Item/Infrastructure/Schemas/ItemMongoose';
-
 import RoleSchema from '../../Role/Infrastructure/Schemas/RoleMongoose';
-import UserSchema from '../../User/Infrastructure/Schemas/UserMongoose';
-import FileSchema from '../../File/Infrastructure/Schemas/FileMongoose';
+import UserSchema from '../../User/Infrastructure/Schemas/UserMongoose';<% if (fileDomain) { %>
+import FileSchema from '../../File/Infrastructure/Schemas/FileMongoose';<% } %>
 import { EmailNotificationSchema, NotificationSchema, PushNotificationSchema } from '../../Notification/Infrastructure/Schemas/NotificationMongoose';
 import TokenSchema from '../../Auth/Infrastructure/Schemas/TokenMongoose';
 
@@ -47,9 +44,8 @@ class MongooseCreateConnection implements ICreateConnection
 
         // Domain
         connection.model<IUserDocument>('User', UserSchema);
-        connection.model<IRoleDocument>('Role', RoleSchema);
-        connection.model<IItemDocument>('Item', ItemSchema);
-        connection.model<IFileDocument>('File', FileSchema);
+        connection.model<IRoleDocument>('Role', RoleSchema);<% if (fileDomain) { %>
+        connection.model<IFileDocument>('File', FileSchema);<% } %>
 
         // Infrastructure
         const NotificationModel = connection.model<INotificationDocument>('Notification', NotificationSchema);

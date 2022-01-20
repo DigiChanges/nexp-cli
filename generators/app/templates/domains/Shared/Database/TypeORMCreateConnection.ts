@@ -14,11 +14,10 @@ class TypeORMCreateConnection implements ICreateConnection
     private connection: Connection;
     private createInstanceConnection: any;
     private entities = [
-        File,
-        Notification,
+        Notification,<% if (fileDomain) { %>
+        File,<% } %>
         Role,
-        User,
-        Item
+        User
     ];
 
     constructor(config: any)

@@ -2,7 +2,6 @@ import { MikroORM } from '@mikro-orm/core';
 import { ICreateConnection } from '@digichanges/shared-experience';
 import User from '../../User/Infrastructure/Schemas/UserMikroORM';
 import Role from '../../Role/Infrastructure/Schemas/RoleMikroORM';
-import Item from '../../Item/Infrastructure/Schemas/ItemMikroORM';
 import File from '../../File/Infrastructure/Schemas/FileMikroORM';
 // import Notification from '../../Notification/Infrastructure/Schemas/NotificationMikroORM';
 // import TokenSchema from '../../Auth/Infrastructure/Schemas/TokenMikroORM';
@@ -15,10 +14,9 @@ class MikroORMCreateConnection implements ICreateConnection
     private connection: any;
     private createInstanceConnection: any;
     private entities = [
-        Role,
-        User,
-        Item,
-        File
+        Role,<% if (fileDomain) { %>
+        File,<% } %>
+        User
     ];
 
     constructor(config: any = null)

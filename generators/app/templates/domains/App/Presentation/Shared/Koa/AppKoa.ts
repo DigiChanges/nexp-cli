@@ -12,19 +12,18 @@ import Locales from '../Locales';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import IndexHandler from '../../Handlers/Koa/IndexHandler';
-import ItemHandler from '../../../../Item/Presentation/Handlers/Koa/ItemHandler';
 import RoleHandler from '../../../../Role/Presentation/Handlers/Koa/RoleHandler';
 import UserHandler from '../../../../User/Presentation/Handlers/Koa/UserHandler';
-import NotificationHandler from '../../../../Notification/Presentation/Handlers/Koa/NotificationHandler';
-import FileHandler from '../../../../File/Presentation/Handlers/Koa/FileHandler';
+import NotificationHandler from '../../../../Notification/Presentation/Handlers/Koa/NotificationHandler';<% if (fileDomain) { %>
+import FileHandler from '../../../../File/Presentation/Handlers/Koa/FileHandler';<% } %>
 import AuthHandler from '../../../../Auth/Presentation/Handlers/Koa/AuthHandler';
 import IAppConfig from '../../../InterfaceAdapters/IAppConfig';
 import WhiteListHandler from '../../../Tests/Koa/WhiteListHandler';
 import { ErrorHandler } from './ErrorHandler';
 import Logger from '../../../../Shared/Logger/Logger';
-import MainConfig from '../../../../Config/mainConfig';
+import MainConfig from '../../../../Config/mainConfig';<% if (orm == "MikroORM") { %>
 import { RequestContext } from '@mikro-orm/core';
-import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';
+import { orm as mikroORM } from '../../../../Shared/Database/MikroORMCreateConnection';<% } %>
 
 class AppKoa implements IApp
 {
@@ -55,12 +54,9 @@ class AppKoa implements IApp
 
         this.app.use(bodyParser({
             jsonLimit: '5mb'
-        }));
+        }));<% if (orm == "MikroORM") { %>
 
-        if (MainConfig.getInstance().getConfig().dbConfig.default === 'MikroORM')
-        {
-            this.app.use((ctx, next) => RequestContext.createAsync(orm.em, next));
-        }
+        this.app.use((ctx, next) => RequestContext.createAsync(mikroORM.em, next));<% } %>
 
         this.app.use(koaPino({ logger: <any>Logger }));
 
@@ -78,9 +74,6 @@ class AppKoa implements IApp
         this.app.use(WhiteListHandler.routes());
         this.app.use(WhiteListHandler.allowedMethods());
 
-        this.app.use(ItemHandler.routes());
-        this.app.use(ItemHandler.allowedMethods());
-
         this.app.use(RoleHandler.routes());
         this.app.use(RoleHandler.allowedMethods());
 
@@ -88,10 +81,10 @@ class AppKoa implements IApp
         this.app.use(UserHandler.allowedMethods());
 
         this.app.use(NotificationHandler.routes());
-        this.app.use(NotificationHandler.allowedMethods());
+        this.app.use(NotificationHandler.allowedMethods());<% if (fileDomain) { %>
 
         this.app.use(FileHandler.routes());
-        this.app.use(FileHandler.allowedMethods());
+        this.app.use(FileHandler.allowedMethods());<% } %>
 
         this.app.use(AuthHandler.routes());
         this.app.use(AuthHandler.allowedMethods());

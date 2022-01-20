@@ -6,9 +6,10 @@ import { ICreateConnection, ITokenRepository } from '@digichanges/shared-experie
 
 import DatabaseFactory from './Shared/Factories/DatabaseFactory';
 import EventHandler from './Shared/Events/EventHandler';
-import { REPOSITORIES } from './Config/Injects/repositories';
-import TokenMongoRepository from './Auth/Infrastructure/Repositories/TokenMongoRepository';
-import TokenSqlRepository from './Auth/Infrastructure/Repositories/TokenSqlRepository';
+import { REPOSITORIES } from './Config/Injects/repositories';<% if (orm == 'Mongoose') { %>
+import TokenMongoRepository from './Auth/Infrastructure/Repositories/TokenMongoRepository';<% } %><% if (orm == 'TypeORM') { %>
+import TokenSqlRepository from './Auth/Infrastructure/Repositories/TokenSqlRepository';<% } %><% if (orm == 'MikroORM') { %>
+import TokenMikroSqlRepository from './Auth/Infrastructure/Repositories/TokenMikroSqlRepository';<% } %>
 import { validateEnv } from './Config/validateEnv';
 import container from './inversify.config';
 import ITokenDomain from './Auth/InterfaceAdapters/ITokenDomain';
@@ -37,11 +38,10 @@ const initTestServer = async(): Promise<any> =>
 
     const mainConfig = MainConfig.getInstance();
 
-    container.unbind(REPOSITORIES.ITokenRepository);
-    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(mainConfig.getConfig().dbConfig.default === 'Mongoose'
-        ? TokenMongoRepository
-        : TokenSqlRepository
-    );
+    container.unbind(REPOSITORIES.ITokenRepository);<% if (orm == 'Mongoose') { %>
+    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenMongoRepository);<% } %><% if (orm == 'TypeORM') { %>
+    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenSqlRepository);<% } %><% if (orm == 'MikroORM') { %>
+    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenMikroSqlRepository);<% } %>
 
     container.unbind(FACTORIES.INotificationFactory);
     container.bind<INotificationFactory>(FACTORIES.INotificationFactory).to(MockNotificationFactory);
