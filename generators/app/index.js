@@ -15,6 +15,7 @@ const notification = require("./src/domains/notification");
 const role = require("./src/domains/role");
 const shared = require("./src/domains/shared");
 const user = require("./src/domains/user");
+const fs = require("fs");
 
 module.exports = class extends Generator {
   prompting() {
@@ -78,18 +79,25 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.spawnCommandSync('git', ['init']);
-
-    root(this);
-    packagejson(this);
-    indexFiles(this);
-    app(this);
-    auth(this);
-    config(this);
-    file(this);
-    notification(this);
-    role(this);
-    shared(this);
-    user(this);
+    if(!fs.existsSync(this.props.projectName))
+    {
+      this.destinationRoot(this.props.projectName);
+      this.spawnCommandSync('git', ['init']);
+      root(this);
+      packagejson(this);
+      indexFiles(this);
+      app(this);
+      auth(this);
+      config(this);
+      file(this);
+      notification(this);
+      role(this);
+      shared(this);
+      user(this);
+    }
+    else
+    {
+      this.log(`${chalk.red(this.props.projectName)} project is already created`);
+    }
   }
 };
