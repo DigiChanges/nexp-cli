@@ -11,7 +11,7 @@ Each module is divided by business domain:
 - App
 - Auth
 - File
-- Item
+- DomainName
 - Notification
 - Role
 - User

@@ -2,7 +2,6 @@
 const _ = require("lodash");
 const Generator = require("yeoman-generator");
 _.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
-_.mixin(require("lodash-inflection"));
 const chalk = require("chalk");
 const yosay = require("yosay");
 const packagejson = require("./src/packagejson");
@@ -16,7 +15,9 @@ const notification = require("./src/domains/notification");
 const role = require("./src/domains/role");
 const shared = require("./src/domains/shared");
 const user = require("./src/domains/user");
+const domain = require("./src/domain/Domain");
 const fs = require("fs");
+const {formatName, pascalCase} = require('../../Helpers');
 
 module.exports = class extends Generator {
 
@@ -97,7 +98,7 @@ module.exports = class extends Generator {
         name: "domainName",
         message: "what's the domain name?",
       }]).then(props => {
-        props.domainName = this.validateName(props.domainName)
+        props.domainName = formatName(props.domainName)
         this.props = props
       });
 
@@ -105,7 +106,7 @@ module.exports = class extends Generator {
         type: "input",
         name: "pluralName",
         message: "what's the plural name?",
-        default: () => this.validateName(this.props.domainName,true),
+        default: () => formatName(this.props.domainName,true),
       }]).then(props => {
         this.props = Object.assign(this.props,props);
       });
@@ -118,6 +119,11 @@ module.exports = class extends Generator {
       }]).then(props => {
         this.props = Object.assign(this.props,props);
         console.log(this.props)
+        this.props = {
+          ...this.props,
+          domainNameCamel: _.camelCase(this.props.domainName),
+          domainNamePlural: pascalCase(this.props.pluralName),
+        };
       });
     } else
     {
@@ -148,50 +154,9 @@ module.exports = class extends Generator {
       {
         throw new Error(`${chalk.red(this.props.projectName)} project is already created`);
       }
-    }
-  }
-
-  validateName(moduleName, sg = false)
-  {
-
-    const pascalCase = (str) =>
+    } else  if(this.options.command === 'createDomain' || this.options.command === 'dom')
     {
-      return _.startCase(_.camelCase(str)).replace(/ /g, '');
+        domain(this);
     }
-
-    return _.snakeCase(moduleName).split('_').map( (value, index, array) => {
-      if (sg)
-      {
-        if (array.length > 1)
-        {
-          if (index === 0)
-          {
-            return pascalCase(_.singularize(value));
-          }
-          else
-          {
-            if ((index + 1) === array.length)
-            {
-              return pascalCase(_.pluralize(value));
-            }
-
-            else
-            {
-              return pascalCase(_.singularize(value));
-            }
-          }
-
-        }
-        else
-        {
-          return pascalCase(_.pluralize(value));
-        }
-      }
-
-      else
-      {
-        return pascalCase(_.singularize(value));
-      }
-    }).join('');
   }
 };
