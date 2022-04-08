@@ -18,12 +18,12 @@ abstract class BaseSqlRepository<T> implements IBaseRepository<T>
 
     async save(entity: T): Promise<T>
     {
-        return await this.repository.save(entity);
+        return await this.repository.save(entity as any);
     }
 
     async getOne(id: string): Promise<T>
     {
-        const entity = await this.repository.findOne(id);
+        const entity = await this.repository.findOneById(id);
 
         if (!entity)
         {
@@ -35,12 +35,12 @@ abstract class BaseSqlRepository<T> implements IBaseRepository<T>
 
     async update(entity: T): Promise<T>
     {
-        return await this.repository.save(entity);
+        return await this.repository.save(entity as any);
     }
 
     async delete(id: string): Promise<T>
     {
-        const entity = await this.repository.findOne(id);
+        const entity = await this.repository.findOneById(id);
 
         if (!entity)
         {
@@ -52,11 +52,9 @@ abstract class BaseSqlRepository<T> implements IBaseRepository<T>
         return entity;
     }
 
-    async getOneBy(condition: Record<string, any>, options: IByOptions = { initThrow: true }): Promise<T>
+    async getOneBy(condition: Record<string, any>, options: IByOptions = {}): Promise<T>
     {
-        let { initThrow } = options;
-
-        initThrow = initThrow ?? false;
+        const { initThrow = true } = options;
 
         const entity = await this.repository.findOne(condition);
 
@@ -99,7 +97,7 @@ abstract class BaseSqlRepository<T> implements IBaseRepository<T>
             loadEagerRelations: false
         };
 
-        const exist = await this.repository.findOne(conditionMap);
+        const exist = await this.repository.findOne(conditionMap as FindOneOptions<T>);
 
         if (initThrow && !exist)
         {

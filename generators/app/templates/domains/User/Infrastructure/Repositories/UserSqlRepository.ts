@@ -1,11 +1,11 @@
-import IUserRepository from '../../InterfaceAdapters/IUserRepository';
+import IUserRepository from './IUserRepository';
 import User from '../../Domain/Entities/User';
 import { injectable } from 'inversify';
 import { ICriteria, IPaginator } from '@digichanges/shared-experience';
 
 import Paginator from '../../../App/Presentation/Shared/Paginator';
 import UserFilter from '../../Presentation/Criterias/UserFilter';
-import IUserDomain from '../../InterfaceAdapters/IUserDomain';
+import IUserDomain from '../../Domain/Entities/IUserDomain';
 import UserSchema from '../Schemas/UserTypeORM';
 
 import NotFoundException from '../../../Shared/Exceptions/NotFoundException';
@@ -21,7 +21,7 @@ class UserSqlRepository extends BaseSqlRepository<IUserDomain> implements IUserR
 
     async getOneByEmail(email: string): Promise<IUserDomain>
     {
-        const user = await this.repository.findOne({ email });
+        const user = await this.repository.findOneBy({ email });
 
         if (!user)
         {
@@ -33,7 +33,7 @@ class UserSqlRepository extends BaseSqlRepository<IUserDomain> implements IUserR
 
     async getOneByConfirmationToken(confirmationToken: string): Promise<IUserDomain>
     {
-        const user = await this.repository.findOne({ confirmationToken });
+        const user = await this.repository.findOneBy({ confirmationToken });
 
         if (!user)
         {

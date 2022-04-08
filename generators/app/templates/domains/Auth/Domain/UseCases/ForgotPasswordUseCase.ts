@@ -1,6 +1,6 @@
 import MainConfig from '../../../Config/mainConfig';
-import ForgotPasswordPayload from '../../InterfaceAdapters/Payloads/ForgotPasswordPayload';
-import IUserRepository from '../../../User/InterfaceAdapters/IUserRepository';
+import ForgotPasswordPayload from '../Payloads/ForgotPasswordPayload';
+import IUserRepository from '../../../User/Infrastructure/Repositories/IUserRepository';
 import { REPOSITORIES } from '../../../Config/Injects/repositories';
 import { containerFactory } from '../../../Shared/Decorators/ContainerFactory';
 import ForgotPasswordEvent from '../../../Shared/Events/ForgotPasswordEvent';
@@ -16,15 +16,16 @@ class ForgotPasswordUseCase
 
     async handle(payload: ForgotPasswordPayload): Promise<ILocaleMessage>
     {
-        const config = MainConfig.getInstance();
-        const user = await this.repository.getOneByEmail(payload.getEmail());
+        const { urlWeb } = MainConfig.getInstance().getConfig().url;
+        const { confirmationToken, passwordRequestedAt, email } = payload;
+        const user = await this.repository.getOneByEmail(email);
 
-        user.confirmationToken = String(await payload.getConfirmationToken());
-        user.passwordRequestedAt = payload.getPasswordRequestedAt();
+        user.confirmationToken = confirmationToken;
+        user.passwordRequestedAt = passwordRequestedAt;
 
         await this.repository.save(user);
 
-        const urlConfirmationToken = `${config.getConfig().url.urlWeb}/changeForgotPassword/${user.confirmationToken}`;
+        const urlConfirmationToken = `${urlWeb}/changeForgotPassword/${confirmationToken}`;
 
         void await SendEmailService.handle({
             event: ForgotPasswordEvent.FORGOT_PASSWORD_EVENT,

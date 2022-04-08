@@ -62,8 +62,10 @@
       "secretKey": "12345678",
       "useSSL": false,
       "port": 9000,
-      "region": "us-east-1",
-      "bucket": "experience"
+      "publicBucket": "experience",
+      "privateBucket": "experience",
+      "rootPath": "",
+      "region": "us-east-1"
     },
     "local": {
       "type": "local"
@@ -104,7 +106,7 @@
     "urlWeb": "http://localhost:3000/"
   },
   "productInfo": {
-    "productName": "<%= projectName %>"
+    "productName": "experience"
   },
   "validationSettings": {
     "password": {
@@ -125,10 +127,6 @@
     {
       "methods": ["POST"],
       "url": "/api/auth/signup"
-    },
-    {
-      "methods": ["POST"],
-      "url": "/api/auth/forgotPassword"
     },
     {
       "methods": ["POST"],

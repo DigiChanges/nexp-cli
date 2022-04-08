@@ -17,10 +17,6 @@ class Roles
             ],
             [Roles.OPERATOR]: [
                 Permissions.USERS_CHANGE_MY_PASSWORD,
-                Permissions.ITEMS_SAVE,
-                Permissions.ITEMS_UPDATE,
-                Permissions.ITEMS_SHOW,
-                Permissions.ITEMS_LIST,
                 Permissions.FILES_UPLOAD,
                 Permissions.FILES_DOWNLOAD,
                 Permissions.FILES_LIST

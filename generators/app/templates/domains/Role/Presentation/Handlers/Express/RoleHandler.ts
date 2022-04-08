@@ -13,9 +13,11 @@ import RoleUpdateRequest from '../../Requests/RoleUpdateRequest';
 import AuthorizeMiddleware from '../../../../Auth/Presentation/Middlewares/Express/AuthorizeMiddleware';
 import Permissions from '../../../../Config/Permissions';
 
-import IRoleDomain from '../../../InterfaceAdapters/IRoleDomain';
+import IRoleDomain from '../../../Domain/Entities/IRoleDomain';
 import RoleController from '../../Controllers/RoleController';
-
+import ResponseMessageEnum from '../../../../App/Domain/Enum/ResponseMessageEnum';
+import ResponseTransformer from '../../../../App/Presentation/Transformers/DefaultMessageTransformer';
+import ResponseData from '../../../../App/Presentation/Transformers/Response/DataResponseMessage';
 @controller('/api/roles')
 class RoleHandler
 {
@@ -34,8 +36,8 @@ class RoleHandler
         const _request = new RoleRepRequest(req.body);
 
         const role: IRoleDomain = await this.controller.save(_request);
-
-        this.responder.send(role, req, res, StatusCode.HTTP_CREATED, new RoleTransformer());
+        const responseData = new ResponseData(role.getId(), ResponseMessageEnum.CREATED);
+        void await this.responder.send(responseData, req, res, StatusCode.HTTP_CREATED, new ResponseTransformer());
     }
 
     @httpGet('/', AuthorizeMiddleware(Permissions.ROLES_LIST))
@@ -51,11 +53,11 @@ class RoleHandler
     @httpGet('/:id', AuthorizeMiddleware(Permissions.ROLES_SHOW))
     public async get_one(@request() req: Request, @response() res: Response, @next() nex: NextFunction)
     {
-        const _request = new IdRequest(req.params.id);
+        const _request = new IdRequest({ id: req.params.id });
 
         const role: IRoleDomain = await this.controller.getOne(_request);
 
-        this.responder.send(role, req, res, StatusCode.HTTP_OK, new RoleTransformer());
+        void await this.responder.send(role, req, res, StatusCode.HTTP_OK, new RoleTransformer());
     }
 
     @httpPut('/:id', AuthorizeMiddleware(Permissions.ROLES_UPDATE))
@@ -64,18 +66,18 @@ class RoleHandler
         const _request = new RoleUpdateRequest(req.body, req.params.id);
 
         const role: IRoleDomain = await this.controller.update(_request);
-
-        this.responder.send(role, req, res, StatusCode.HTTP_CREATED, new RoleTransformer());
+        const responseData = new ResponseData(role.getId(), ResponseMessageEnum.UPDATED);
+        void await this.responder.send(responseData, req, res, StatusCode.HTTP_CREATED, new ResponseTransformer());
     }
 
     @httpDelete('/:id', AuthorizeMiddleware(Permissions.ROLES_DELETE))
     public async remove(@request() req: Request, @response() res: Response, @next() nex: NextFunction)
     {
-        const _request = new IdRequest(req.params.id);
+        const _request = new IdRequest({ id: req.params.id });
 
         const data = await this.controller.remove(_request);
 
-        this.responder.send(data, req, res, StatusCode.HTTP_CREATED, new RoleTransformer());
+        void await this.responder.send(data, req, res, StatusCode.HTTP_CREATED, new RoleTransformer());
     }
 }
 

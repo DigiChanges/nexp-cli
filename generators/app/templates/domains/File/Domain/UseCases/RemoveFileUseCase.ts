@@ -1,4 +1,4 @@
-import IFileDomain from '../../InterfaceAdapters/IFileDomain';
+import IFileDomain from '../Entities/IFileDomain';
 import IdPayload from '../../../Shared/InterfaceAdapters/IdPayload';
 import FileService from '../Services/FileService';
 
@@ -8,7 +8,7 @@ class RemoveFileUseCase
 
     async handle(payload: IdPayload): Promise<IFileDomain>
     {
-        const id = payload.getId();
+        const { id } = payload;
         return this.fileService.removeFile(id);
     }
 }

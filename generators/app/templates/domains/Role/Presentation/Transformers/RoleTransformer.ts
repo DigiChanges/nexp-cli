@@ -1,12 +1,12 @@
 import moment from 'moment';
 import { Transformer } from '@digichanges/shared-experience';
 
-import IRoleDomain from '../../InterfaceAdapters/IRoleDomain';
-import IRoleTransformer from '../../InterfaceAdapters/IRoleTransformer';
+import IRoleDomain from '../../Domain/Entities/IRoleDomain';
+import IRoleTransformer from './IRoleTransformer';
 
 class RoleTransformer extends Transformer
 {
-    public transform(role: IRoleDomain): IRoleTransformer
+    public async transform(role: IRoleDomain): Promise<IRoleTransformer>
     {
         return {
             id: role.getId(),

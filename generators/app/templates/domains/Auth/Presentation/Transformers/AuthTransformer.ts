@@ -1,9 +1,9 @@
 import moment from 'moment';
 import { Transformer } from '@digichanges/shared-experience';
 
-import IToken from '../../InterfaceAdapters/IToken';
+import IToken from '../../Domain/Models/IToken';
 import RoleUserTransformer from '../../../Role/Presentation/Transformers/RoleUserTransformer';
-import IUserDomain from '../../../User/InterfaceAdapters/IUserDomain';
+import IUserDomain from '../../../User/Domain/Entities/IUserDomain';
 import AuthService from '../../Domain/Services/AuthService';
 
 class AuthTransformer extends Transformer
@@ -16,7 +16,7 @@ class AuthTransformer extends Transformer
         this.roleUserTransformer = new RoleUserTransformer();
     }
 
-    public transform(token: IToken)
+    public async transform(token: IToken)
     {
         const user: IUserDomain = token.getUser();
         const authService: AuthService = new AuthService();
@@ -29,7 +29,8 @@ class AuthTransformer extends Transformer
                 email: token.getUser().email,
                 enable: token.getUser().enable,
                 permissions: authService.getPermissions(user),
-                roles: this.roleUserTransformer.handle(token.getUser().roles),
+                isSumerAdmin: token.getUser().isSuperAdmin,
+                roles: await this.roleUserTransformer.handle(token.getUser().roles),
                 createdAt: moment(token.getUser().createdAt).utc().unix(),
                 updatedAt: moment(token.getUser().updatedAt).utc().unix()
             },

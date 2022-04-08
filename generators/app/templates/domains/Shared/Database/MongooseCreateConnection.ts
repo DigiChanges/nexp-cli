@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 import MainConfig from '../../Config/mainConfig';
 import { ICreateConnection } from '@digichanges/shared-experience';
 
-import IUserDocument from '../../User/InterfaceAdapters/IUserDocument';
-import IRoleDocument from '../../Role/InterfaceAdapters/IRoleDocument';<% if (fileDomain) { %>
-import IFileDocument from '../../File/InterfaceAdapters/IFileDocument';<% } %>
-import INotificationDocument from '../../Notification/InterfaceAdapters/INotificationDocument';
-import ITokenDocument from '../../Auth/InterfaceAdapters/ITokenDocument';
+import IUserDocument from '../../User/Infrastructure/Schemas/IUserDocument';
+import IRoleDocument from '../../Role/Infrastructure/Schemas/IRoleDocument';<% if (fileDomain) { %>
+import IFileDocument from '../../File/Infrastructure/Schemas/IFileDocument';<% } %>
+import INotificationDocument from '../../Notification/Infrastructure/Schemas/INotificationDocument';
+import ITokenDocument from '../../Auth/Infrastructure/Schemas/ITokenDocument';
 
 import RoleSchema from '../../Role/Infrastructure/Schemas/RoleMongoose';
 import UserSchema from '../../User/Infrastructure/Schemas/UserMongoose';<% if (fileDomain) { %>

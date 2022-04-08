@@ -1,9 +1,7 @@
-import { PopulateOptions } from 'mongoose';
-
 interface IByOptions
 {
-    initThrow? : boolean | undefined;
-    populate?: string | PopulateOptions | PopulateOptions[] | undefined;
+    initThrow?: boolean | undefined;
+    populate?: string | string[] | boolean | undefined;
 }
 
 export default IByOptions;

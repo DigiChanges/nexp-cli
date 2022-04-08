@@ -2,8 +2,8 @@ import { ITokenRepository } from '@digichanges/shared-experience';
 import { injectable } from 'inversify';
 import BaseMikroSqlRepository from '../../../App/Infrastructure/Repositories/BaseMikroSqlRepository';
 import Token from '../../Domain/Entities/Token';
-import ITokenDomain from '../../InterfaceAdapters/ITokenDomain';
-import TokenSchema from '../Schemas/TokenTypeORM';
+import ITokenDomain from '../../Domain/Entities/ITokenDomain';
+import TokenSchema from '../Schemas/TokenMikroORM';
 
 @injectable()
 class TokenMikroSqlRepository extends BaseMikroSqlRepository<ITokenDomain> implements ITokenRepository<ITokenDomain>

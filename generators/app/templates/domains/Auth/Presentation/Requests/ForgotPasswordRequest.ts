@@ -1,35 +1,47 @@
-import { IsEmail } from 'class-validator';
-import { IEncryption } from '@digichanges/shared-experience';
+import { IsDate, IsEmail, IsString } from 'class-validator';
 
-import ForgotPasswordPayload from '../../InterfaceAdapters/Payloads/ForgotPasswordPayload';
+import ForgotPasswordPayload from '../../Domain/Payloads/ForgotPasswordPayload';
 import moment from 'moment';
-import EncryptionFactory from '../../../Shared/Factories/EncryptionFactory';
+import jwt from 'jwt-simple';
+import MainConfig from '../../../Config/mainConfig';
 
 class ForgotPasswordRequest implements ForgotPasswordPayload
 {
-    @IsEmail()
-    email: string;
+    private readonly _email: string;
+    private readonly _payload: Record<string, any>;
+    private readonly _secret: string;
 
     constructor(data: Record<string, any>)
     {
-        this.email = data.email;
+        const { iss, secret, aud } = MainConfig.getInstance().getConfig().jwt;
+        const expires = moment().utc().add({ minutes: 5 }).unix();
+
+        this._email = data.email;
+        this._secret = secret;
+        this._payload = {
+            iss,
+            aud,
+            sub: this._email,
+            iat: expires,
+            exp: expires,
+            email: this._email
+        };
     }
 
-    getEmail(): string
+    @IsEmail()
+    get email(): string
     {
-        return this.email;
+        return this._email;
     }
 
-    async getConfirmationToken(): Promise<string>
+    @IsString()
+    get confirmationToken(): string
     {
-        const encryption: IEncryption = EncryptionFactory.create('md5');
-
-        const stringToEncrypt = `${this.email}${moment().utc().unix()}`;
-
-        return await encryption.encrypt(stringToEncrypt);
+        return jwt.encode(this._payload, this._secret, 'HS512');
     }
 
-    getPasswordRequestedAt(): Date
+    @IsDate()
+    get passwordRequestedAt(): Date
     {
         return moment().toDate();
     }

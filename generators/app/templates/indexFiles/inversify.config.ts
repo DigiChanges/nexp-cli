@@ -5,9 +5,9 @@ import FormatResponder from './App/Presentation/Shared/FormatResponder';
 import IFormatResponder from './Shared/InterfaceAdapters/IFormatResponder';<% if (http == "Express") { %>
 import Responder from './App/Presentation/Shared/Express/Responder';<% } %>
 
-import IUserRepository from './User/InterfaceAdapters/IUserRepository';
-import IRoleRepository from './Role/InterfaceAdapters/IRoleRepository';<% if (fileDomain) { %>
-import IFileRepository from './File/InterfaceAdapters/IFileRepository';<% } %>
+import IUserRepository from './User/Infrastructure/Repositories/IUserRepository';
+import IRoleRepository from './Role/Infrastructure/Repositories/IRoleRepository';<% if (fileDomain) { %>
+import IFileRepository from './File/Infrastructure/Repositories/IFileRepository';<% } %>
 
 import { REPOSITORIES } from './Config/Injects/repositories';
 import { TYPES } from './Config/Injects/types';
@@ -29,9 +29,9 @@ import TokenRedisRepository from './Auth/Infrastructure/Repositories/TokenRedisR
 
 import { ITokenRepository } from '@digichanges/shared-experience';
 
-import ITokenDomain from './Auth/InterfaceAdapters/ITokenDomain';
-import INotificationRepository from './Notification/InterfaceAdapters/INotificationRepository';
-import INotificationDomain from './Notification/InterfaceAdapters/INotificationDomain';
+import ITokenDomain from './Auth/Domain/Entities/ITokenDomain';
+import INotificationRepository from './Notification/Infrastructure/Repositories/INotificationRepository';
+import INotificationDomain from './Notification/Domain/Entities/INotificationDomain';
 import NotificationMongoRepository from './Notification/Infrastructure/Repositories/NotificationMongoRepository';
 import INotificationFactory from './Notification/Shared/INotificationFactory';
 import { FACTORIES } from './Config/Injects/factories';

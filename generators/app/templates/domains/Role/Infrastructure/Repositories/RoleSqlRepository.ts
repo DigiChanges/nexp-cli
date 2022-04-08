@@ -1,10 +1,10 @@
-import IRoleRepository from '../../InterfaceAdapters/IRoleRepository';
+import IRoleRepository from './IRoleRepository';
 import { injectable } from 'inversify';
 import { ICriteria, IPaginator } from '@digichanges/shared-experience';
 
 import Paginator from '../../../App/Presentation/Shared/Paginator';
 import RoleFilter from '../../Presentation/Criterias/RoleFilter';
-import IRoleDomain from '../../InterfaceAdapters/IRoleDomain';
+import IRoleDomain from '../../Domain/Entities/IRoleDomain';
 import BaseSqlRepository from '../../../App/Infrastructure/Repositories/BaseSqlRepository';
 import Role from '../../Domain/Entities/Role';
 import RoleSchema from '../Schemas/RoleTypeORM';
@@ -22,7 +22,7 @@ class RoleSqlRepository extends BaseSqlRepository<IRoleDomain> implements IRoleR
 
     async getBySlug(slug: string): Promise<IRoleDomain>
     {
-        return await this.repository.findOne({ slug });
+        return await this.repository.findOneBy({ slug });
     }
 
     async list(criteria: ICriteria): Promise<IPaginator>
@@ -72,7 +72,7 @@ class RoleSqlRepository extends BaseSqlRepository<IRoleDomain> implements IRoleR
             throw new RoleOfSystemNotDeletedException();
         }
 
-        const entity = await this.repository.findOne(id);
+        const entity = await this.repository.findOneById(id);
 
         if (!entity)
         {

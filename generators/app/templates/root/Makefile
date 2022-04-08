@@ -10,6 +10,12 @@ down:
 	@echo '************                               ************'
 	docker-compose down
 
+stop:
+	@echo '************                               ************'
+	@echo '************           STOP CONTAINERS     ************'
+	@echo '************                               ************'
+	docker-compose stop
+
 dev:
 	@echo '************                               ************'
 	@echo '************           DEV INIT    	      ************'
@@ -40,6 +46,12 @@ exec:
 	@echo '************                               ************'
 	docker-compose exec node bash
 
+sh:
+	@echo '************                               ************'
+	@echo '************           Exec NODE    	      ************'
+	@echo '************                               ************'
+	docker-compose exec node sh
+
 test:
 	@echo '************                               ************'
 	@echo '************           Exec NODE TEST      ************'
@@ -56,7 +68,7 @@ init:
 	@echo '************                               ************'
 	@echo '************           Init NODE    	      ************'
 	@echo '************                               ************'
-	docker-compose exec node bash dev.init.sh
+	docker-compose exec node sh dev.init.sh
 
 clean:
 	docker-compose down -v --remove-orphans

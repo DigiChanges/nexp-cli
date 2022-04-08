@@ -1,25 +1,28 @@
-FROM node:16-alpine as node
+FROM node:16 as node
 
 # Builder stage
-FROM node AS builder
+FROM node AS dev
 
-WORKDIR /home/node/app
+USER node
+
+RUN mkdir /home/node/cache
+WORKDIR /home/node/cache
 
 COPY --chown=node:node package.json yarn.lock ./
 
 RUN yarn
 
-COPY . .
+WORKDIR /home/node/app
 
-RUN yarn pre-build && yarn tsc
+COPY . .
 
 EXPOSE ${PORT}
 
 # Run development server
-ENTRYPOINT [ "yarn", "dev:watch" ]
+ENTRYPOINT [ "bash", "entrypoint.sh" ]
 
 # Final stage
-FROM node AS final
+FROM node AS prod
 
 ENV NODE_ENV production
 

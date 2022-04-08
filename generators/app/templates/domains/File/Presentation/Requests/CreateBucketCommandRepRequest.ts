@@ -1,22 +1,31 @@
 import { IsString } from 'class-validator';
-import CreateBucketPayload from '../../InterfaceAdapters/Payloads/CreateBucketPayload';
+import CreateBucketPayload from '../../Domain/Payloads/CreateBucketPayload';
 
-// TODO: Refactor set policy
 class CreateBucketCommandRequest implements CreateBucketPayload
 {
-    @IsString()
-    bucketName: string;
-
-    bucketPolicy: any;
-
-    @IsString()
-    region: string;
+    private readonly _name: string;
+    private readonly _publicBucketPolicy: any;
+    private readonly _privateBucketPolicy: any;
+    private readonly _region: string;
 
     constructor(env: any)
     {
-        this.bucketName = env.bucketName;
-        this.region = env.region;
-        this.bucketPolicy = {
+        this._name = env.name;
+        this._region = env.region;
+        this._privateBucketPolicy = {
+            Version: '2012-10-17',
+            Statement: [
+                {
+                    Effect: 'Allow',
+                    Principal: { AWS: '*' },
+                    Action: [
+                        's3:GetBucketLocation'
+                    ],
+                    Resource: 'arn:aws:s3:::*'
+                }
+            ]
+        };
+        this._publicBucketPolicy = {
             Version: '2012-10-17',
             Statement: [
                 {
@@ -25,39 +34,36 @@ class CreateBucketCommandRequest implements CreateBucketPayload
                     Action: [
                         's3:GetBucketLocation',
                         's3:ListBucket',
-                        's3:ListBucketMultipartUploads'
+                        's3:GetObject'
                     ],
-                    Resource: `arn:aws:s3:::${this.bucketName}`
-                },
-                {
-                    Effect: 'Allow',
-                    Principal: { AWS: '*' },
-                    Action: [
-                        's3:GetObject',
-                        's3:PutObject',
-                        's3:DeleteObject',
-                        's3:ListMultipartUploadParts',
-                        's3:AbortMultipartUpload'
-                    ],
-                    Resource: `arn:aws:s3:::${this.bucketName}/*`
+                    Resource: [
+                        'arn:aws:s3:::*'
+                    ]
                 }
             ]
         };
     }
 
-    getBucketName(): string
+    @IsString()
+    get name(): string
     {
-        return this.bucketName;
+        return this._name;
     }
 
-    getBucketPolicy(): string
+    get publicBucketPolicy(): string
     {
-        return JSON.stringify(this.bucketPolicy);
+        return JSON.stringify(this._publicBucketPolicy);
     }
 
-    getRegion(): string
+    get privateBucketPolicy(): string
     {
-        return this.region;
+        return JSON.stringify(this._privateBucketPolicy);
+    }
+
+    @IsString()
+    get region(): string
+    {
+        return this._region;
     }
 }
 

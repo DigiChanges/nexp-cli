@@ -1,29 +1,30 @@
-import PresignedFileRepPayload from '../../InterfaceAdapters/Payloads/PresignedFileRepPayload';
+import PresignedFileRepPayload from '../../Domain/Payloads/PresignedFileRepPayload';
 import { IsOptional, IsString } from 'class-validator';
+import FileOptionsQueryRequest from './FileOptionsQueryRequest';
 
-class PresignedFileRepRequest implements PresignedFileRepPayload
+class PresignedFileRepRequest extends FileOptionsQueryRequest implements PresignedFileRepPayload
 {
+    private readonly _filename: string;
+    private readonly _expiry: number;
+
+    constructor({ data, query }: any)
+    {
+        super({ query });
+        this._filename = data.filename;
+        this._expiry = data.expiry;
+    }
+
     @IsString()
-    filename: string;
+    get name(): string
+    {
+        return this._filename;
+    }
 
     @IsOptional()
     @IsString()
-    expiry: number;
-
-    constructor(data: Record<string, any>)
+    get expiry(): number
     {
-        this.filename = data.filename;
-        this.expiry = data.expiry;
-    }
-
-    getName(): string
-    {
-        return this.filename;
-    }
-
-    getExpiry(): number
-    {
-        return this.expiry || 60 * 24 * 24 * 7;
+        return this._expiry || 60 * 24 * 24 * 7;
     }
 }
 

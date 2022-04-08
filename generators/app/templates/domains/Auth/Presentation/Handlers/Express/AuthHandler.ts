@@ -26,6 +26,7 @@ import RegisterRequest from '../../Requests/RegisterRequest';
 import UpdateMeRequest from '../../Requests/UpdateMeRequest';
 import VerifyYourAccountRequest from '../../Requests/VerifyYourAccountRequest';
 import RefreshTokenMiddleware from '../../Middlewares/Express/RefreshTokenMiddleware';
+import MainConfig from '../../../../Config/mainConfig';
 
 @controller('/api/auth')
 class AuthHandler
@@ -42,16 +43,16 @@ class AuthHandler
     @httpGet('/me')
     public async me(@request() req: Request, @response() res: Response): Promise<void>
     {
-        this.responder.send(AuthUser(req), null, res, StatusCode.HTTP_OK, new UserTransformer());
+        void await this.responder.send(AuthUser(req), null, res, StatusCode.HTTP_OK, new UserTransformer());
     }
 
     @httpPut('/me')
     public async updateMe(@request() req: Request, @response() res: Response): Promise<void>
     {
-        const _request = new UpdateMeRequest(req.body);
-        const payload = await this.controller.updateMe(_request, AuthUser(req));
+        const _request = new UpdateMeRequest(req.body, AuthUser(req));
+        const payload = await this.controller.updateMe(_request);
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_OK, new UserTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_OK, new UserTransformer());
     }
 
     @httpPost('/login')
@@ -67,11 +68,13 @@ class AuthHandler
             {
                 expires: moment.unix(payload.getExpires()).toDate(),
                 maxAge: payload.getExpires(),
-                path: '/api/auth/refresh-token',
-                httpOnly: true
+                path: '/api/auth',
+                secure: MainConfig.getInstance().getConfig().setCookieSecure,
+                httpOnly: true,
+                sameSite: MainConfig.getInstance().getConfig().setCookieSameSite
             });
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new AuthTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new AuthTransformer());
     }
 
     @httpPost('/signup')
@@ -81,17 +84,19 @@ class AuthHandler
 
         const payload = await this.controller.register(_request);
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new DefaultTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new DefaultTransformer());
     }
 
     @httpPost('/logout')
-    public async logout(@request() req: Request, @response() res: Response)
+    public async logout(@request() req: any, @response() res: Response)
     {
-        const payload = await this.controller.logout(AuthUser(req, 'tokenDecode'));
+        const _request = new RefreshTokenRequest(req.refreshToken);
+
+        const payload = await this.controller.logout(_request, AuthUser(req, 'tokenDecode'));
 
         res.cookie('refreshToken', null);
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new DefaultTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new DefaultTransformer());
     }
 
     @httpPost('/refresh-token', RefreshTokenMiddleware)
@@ -107,11 +112,13 @@ class AuthHandler
             {
                 expires: moment.unix(payload.getExpires()).toDate(),
                 maxAge: payload.getExpires(),
-                path: '/api/auth/refresh-token',
-                httpOnly: true
+                path: '/api/auth',
+                secure: MainConfig.getInstance().getConfig().setCookieSecure,
+                httpOnly: true,
+                sameSite: MainConfig.getInstance().getConfig().setCookieSameSite
             });
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new AuthTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new AuthTransformer());
     }
 
     @httpPost('/forgot-password')
@@ -121,7 +128,7 @@ class AuthHandler
 
         const payload = await this.controller.forgotPassword(_request);
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, null);
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, null);
     }
 
     @httpPost('/change-forgot-password')
@@ -131,7 +138,7 @@ class AuthHandler
 
         const payload = await this.controller.changeForgotPassword(_request);
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, null);
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, null);
     }
 
     @httpPut('/verify-your-account/:confirmationToken')
@@ -141,22 +148,22 @@ class AuthHandler
 
         const payload = await this.controller.verifyYourAccount(_request);
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new DefaultTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_CREATED, new DefaultTransformer());
     }
 
     @httpGet('/permissions', AuthorizeMiddleware(Permissions.GET_PERMISSIONS))
-    public permissions(@request() req: Request, @response() res: Response)
+    public async permissions(@request() req: Request, @response() res: Response)
     {
         const payload = this.controller.permissions();
 
-        this.responder.send(payload, req, res, StatusCode.HTTP_OK, new PermissionsTransformer());
+        void await this.responder.send(payload, req, res, StatusCode.HTTP_OK, new PermissionsTransformer());
     }
 
     @httpPost('/sync-roles-permissions', AuthorizeMiddleware(Permissions.AUTH_SYNC_PERMISSIONS))
-    public syncRolesPermissions(@request() req: Request, @response() res: Response)
+    public async syncRolesPermissions(@request() req: Request, @response() res: Response)
     {
         this.controller.syncRolesPermissions();
 
-        this.responder.send({ message: 'Sync Successfully' }, req, res, StatusCode.HTTP_CREATED, null);
+        void await this.responder.send({ message: 'Sync Successfully' }, req, res, StatusCode.HTTP_CREATED, null);
     }
 }

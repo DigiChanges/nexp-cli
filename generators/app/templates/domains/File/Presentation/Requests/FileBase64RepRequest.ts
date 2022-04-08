@@ -1,54 +1,57 @@
-import FileBase64RepPayload from '../../InterfaceAdapters/Payloads/FileBase64RepPayload';
-import { IsBase64, IsMimeType, IsString } from 'class-validator';
+import FileBase64RepPayload from '../../Domain/Payloads/FileBase64RepPayload';
+import { IsBase64, IsMimeType, IsNumber, IsString } from 'class-validator';
+import FileOptionsQueryRequest from './FileOptionsQueryRequest';
 
-class FileBase64RepRequest implements FileBase64RepPayload
+class FileBase64RepRequest extends FileOptionsQueryRequest implements FileBase64RepPayload
 {
-    @IsMimeType()
-    mimeType: string;
+    private readonly _mimeType: string;
+    private readonly _filename: string;
+    private readonly _base64: string;
+
+    constructor({ data, query }: any)
+    {
+        super({ query });
+        this._filename = data.filename;
+        this._base64 = data.base64.split(';base64,').pop();
+        this._mimeType = data.base64.split(';base64').shift().split('data:').pop();
+    }
 
     @IsString()
-    filename: string;
-
-    @IsBase64()
-    base64: string;
-
-    constructor(data: Record<string, any>)
+    get originalName(): string
     {
-        this.filename = data.filename;
-        this.base64 = data.base64.split(';base64,').pop();
-        this.mimeType = data.base64.split(';base64').shift().split('data:').pop();
+        return this._filename;
     }
 
-    getOriginalName(): string
+    @IsMimeType()
+    get mimeType(): string
     {
-        return this.filename.split('.').shift();
+        return this._mimeType;
     }
 
-    getMimeType(): string
-    {
-        return this.mimeType;
-    }
-
-    getPath(): string
+    @IsString()
+    get path(): string
     {
         return '/';
     }
 
-    getExtension(): string
+    @IsString()
+    get extension(): string
     {
-        return this.filename.split('.').pop();
+        return this._filename.includes('.') ? this._filename.split('.').pop() : null;
     }
 
-    getSize(): number
+    @IsNumber()
+    get size(): number
     {
         const MIMETYPE_SIZE = 814;
         const ENCODING_INCREMENT_SIZE = 1.37;
-        return Math.floor((this.base64.length - MIMETYPE_SIZE) / ENCODING_INCREMENT_SIZE);
+        return Math.floor((this._base64.length - MIMETYPE_SIZE) / ENCODING_INCREMENT_SIZE);
     }
 
-    getBase64(): string
+    @IsBase64()
+    get base64(): string
     {
-        return this.base64;
+        return this._base64;
     }
 }
 

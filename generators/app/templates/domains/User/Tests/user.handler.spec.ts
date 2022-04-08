@@ -70,15 +70,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { status, statusCode, data } } = response;
+            const { body: { data } } = response;
 
             expect(response.statusCode).toStrictEqual(201);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_CREATED');
-
-            expect(data.firstName).toStrictEqual(payload.firstName);
-            expect(data.email).toStrictEqual(payload.email);
-            expect(data.enable).toStrictEqual(true);
 
             userId = data.id;
         });
@@ -108,15 +102,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { status, statusCode, data } } = response;
+            const { body: { data } } = response;
 
             expect(response.statusCode).toStrictEqual(201);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_CREATED');
-
-            expect(data.firstName).toStrictEqual(payload.firstName);
-            expect(data.email).toStrictEqual(payload.email);
-            expect(data.enable).toStrictEqual(payload.enable);
 
             userId = data.id;
         });
@@ -138,11 +126,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, data } } = response;
+            const { body: { data } } = response;
 
             expect(response.statusCode).toStrictEqual(200);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_OK');
 
             expect(data.firstName).toStrictEqual(payload.firstName);
             expect(data.email).toStrictEqual(payload.email);
@@ -153,7 +139,7 @@ describe('Start User Test', () =>
             const payload: any = {
                 firstName: 'Jhon Update',
                 lastName: 'Doe Update',
-                email: 'user2@update.com',
+                email: 'user2@updateRep.com',
                 birthday: '04/08/1991',
                 documentType: 'dni',
                 documentNumber: '35319131',
@@ -171,22 +157,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { status, statusCode, data } } = response;
+            const { body: { data } } = response;
 
             expect(response.statusCode).toStrictEqual(201);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_CREATED');
-
-            expect(data.email).toStrictEqual(payload.email);
-            expect(data.firstName).toStrictEqual(payload.firstName);
-            expect(data.lastName).toStrictEqual(payload.lastName);
-            expect(data.enable).toStrictEqual(payload.enable);
-            expect(data.birthday).toStrictEqual(payload.birthday);
-            expect(data.documentType).toStrictEqual(payload.documentType);
-            expect(data.documentNumber).toStrictEqual(payload.documentNumber);
-            expect(data.gender).toStrictEqual(payload.gender);
-            expect(data.phone).toStrictEqual(payload.phone);
-            expect(data.country).toStrictEqual(payload.country);
         });
 
         test('Change my Password /users/change-my-password', async() =>
@@ -203,12 +176,7 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { status, statusCode } } = response;
-
-
             expect(response.statusCode).toStrictEqual(201);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_CREATED');
 
             payload = {
                 email: 'user@node.com',
@@ -221,11 +189,6 @@ describe('Start User Test', () =>
                 .send(payload);
 
             expect(response.statusCode).toStrictEqual(201);
-            expect(response.body.status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_CREATED');
-
-            expect(response.body.data.user.email).toStrictEqual('user@node.com');
-            expect(response.body.data.user.firstName).toStrictEqual('user');
 
             token = response.body.data.token;
         });
@@ -261,11 +224,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, data } } = deleteResponse;
+            const { body: { data } } = deleteResponse;
 
             expect(deleteResponse.statusCode).toStrictEqual(200);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_OK');
 
             expect(data.firstName).toStrictEqual(payload.firstName);
             expect(data.email).toStrictEqual(payload.email);
@@ -281,11 +242,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, pagination } } = response;
+            const { body: { pagination } } = response;
 
             expect(response.statusCode).toStrictEqual(200);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_OK');
 
             expect(pagination.offset).toStrictEqual(0);
             expect(pagination.limit).toStrictEqual(5);
@@ -300,26 +259,21 @@ describe('Start User Test', () =>
             expect(pagination.nextUrl).toContain('/api/users?pagination[offset]=5&pagination[limit]=5');
             expect(pagination.prevUrl).toStrictEqual(null);
             expect(pagination.currentUrl).toContain('/api/users?pagination[offset]=0&pagination[limit]=5');
-
         });
 
         test('Get Users /users without pagination', async() =>
         {
-
             const response: IListUsersResponse = await request
                 .get('/api/users')
                 .set('Accept', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, pagination } } = response;
+            const { body: { pagination } } = response;
 
             expect(response.statusCode).toStrictEqual(200);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_OK');
 
             expect(pagination).not.toBeDefined();
-
         });
 
         test('Get Users /users with Filter Type', async() =>
@@ -330,11 +284,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, data, pagination } } = response;
+            const { body: { data, pagination } } = response;
 
             expect(response.statusCode).toStrictEqual(200);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_OK');
 
             expect(data.length).toStrictEqual(1);
             expect(pagination.total).toStrictEqual(1);
@@ -348,14 +300,12 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, data: [user1, user2] } } = response;
+            const { body: { data: [user1, user2] } } = response;
 
             expect(response.statusCode).toStrictEqual(200);
-            expect(status).toStrictEqual('success');
-            expect(statusCode).toStrictEqual('HTTP_OK');
 
             expect(user1.email).toStrictEqual('user@node.com');
-            expect(user2.email).toStrictEqual('user2@update.com');
+            expect(user2.email).toStrictEqual('user2@updateRep.com');
         });
     });
 
@@ -391,11 +341,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { status, statusCode, message, errors: [error] } } = response;
+            const { body: { message, errors: [error] } } = response;
 
             expect(response.statusCode).toStrictEqual(422);
-            expect(status).toStrictEqual('error');
-            expect(statusCode).toStrictEqual('HTTP_UNPROCESSABLE_ENTITY');
             expect(message).toStrictEqual('Failed Request.');
 
             expect(error.property).toStrictEqual('permissions');
@@ -411,11 +359,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, message, errors: [error] } } = response;
+            const { body: { message, errors: [error] } } = response;
 
             expect(response.statusCode).toStrictEqual(422);
-            expect(status).toStrictEqual('error');
-            expect(statusCode).toStrictEqual('HTTP_UNPROCESSABLE_ENTITY');
             expect(message).toStrictEqual('Failed Request.');
 
             expect(error.property).toStrictEqual('id');
@@ -426,7 +372,7 @@ describe('Start User Test', () =>
         test('Update User /users/:id', async() =>
         {
             const payload = {
-                email: 'aaaa1@update.com',
+                email: 'aaaa1@updateRep.com',
                 firstName: 150,
                 lastName: 'Doe 1',
                 birthday: '04/07/1990',
@@ -445,11 +391,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { status, statusCode, message, errors: [error] } } = response;
+            const { body: { message, errors: [error] } } = response;
 
             expect(response.statusCode).toStrictEqual(422);
-            expect(status).toStrictEqual('error');
-            expect(statusCode).toStrictEqual('HTTP_UNPROCESSABLE_ENTITY');
             expect(message).toStrictEqual('Failed Request.');
 
             expect(error.property).toStrictEqual('permissions');
@@ -465,11 +409,9 @@ describe('Start User Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send();
 
-            const { body: { status, statusCode, message } } = deleteErrorResponse;
+            const { body: { message } } = deleteErrorResponse;
 
             expect(deleteErrorResponse.statusCode).toStrictEqual(400);
-            expect(status).toStrictEqual('error');
-            expect(statusCode).toStrictEqual('HTTP_BAD_REQUEST');
             expect(message).toStrictEqual('User not found.');
         });
     });

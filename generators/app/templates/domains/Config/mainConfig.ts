@@ -47,17 +47,19 @@ type RedisConfig = {
     password: string;
 };
 
-type MinioConfig = {
+export type MinioConfig = {
     endPoint: string;
     accessKey: string;
     secretKey: string;
     useSSL: boolean;
     port: number;
+    publicBucket: string;
+    privateBucket: string;
+    rootPath: string;
     region: string;
-    bucket: string;
 };
 
-type JwtConfig = {
+export type JwtConfig = {
     secret: string;
     expires: number;
     iss: string;
@@ -102,6 +104,8 @@ type ApiWhiteType = {
 type ConfigType = {
     env: string;
     nodePath: string;
+    setCookieSecure: boolean;
+    setCookieSameSite: boolean | 'none' | 'lax' | 'strict';
     serverPort: number;
     auth: {
         authorization: boolean;

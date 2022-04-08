@@ -8,13 +8,6 @@ class Permissions
     static readonly AUTH_SYNC_PERMISSIONS: string = 'authSyncPermissions';
     static readonly GET_PERMISSIONS: string = 'getPermissions';
 
-    // ITEMS
-    static readonly ITEMS_SAVE: string = 'itemsSave';
-    static readonly ITEMS_UPDATE: string = 'itemsUpdate';
-    static readonly ITEMS_SHOW: string = 'itemsShow';
-    static readonly ITEMS_LIST: string = 'itemsList';
-    static readonly ITEMS_DELETE: string = 'itemsDelete';
-
     // USERS
     static readonly USERS_SAVE: string = 'usersSave';
     static readonly USERS_UPDATE: string = 'usersUpdate';

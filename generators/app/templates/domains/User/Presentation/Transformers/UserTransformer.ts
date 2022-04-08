@@ -1,21 +1,21 @@
 import moment from 'moment';
 import { Transformer } from '@digichanges/shared-experience';
 
-import IUserDomain from '../../InterfaceAdapters/IUserDomain';
+import IUserDomain from '../../Domain/Entities/IUserDomain';
 import RoleTransformer from '../../../Role/Presentation/Transformers/RoleTransformer';
-import IUserTransformer from '../../InterfaceAdapters/IUserTransformer';
+import IUserTransformer from './IUserTransformer';
 
 class UserTransformer extends Transformer
 {
-    private role_transformer: RoleTransformer;
+    private roleTransformer: RoleTransformer;
 
     constructor()
     {
         super();
-        this.role_transformer = new RoleTransformer();
+        this.roleTransformer = new RoleTransformer();
     }
 
-    public transform(user: IUserDomain): IUserTransformer
+    public async transform(user: IUserDomain): Promise<IUserTransformer>
     {
         return {
             id: user.getId(),
@@ -30,7 +30,7 @@ class UserTransformer extends Transformer
             country: user.country,
             address: user.address,
             enable: user.enable,
-            roles: this.role_transformer.handle(user.getRoles()),
+            roles: await this.roleTransformer.handle(user.getRoles()),
             permissions: user.permissions,
             createdAt: moment(user.createdAt).utc().unix(),
             updatedAt: moment(user.updatedAt).utc().unix()

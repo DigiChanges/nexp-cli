@@ -18,12 +18,14 @@ import UserAssignRoleRequest from '../../Requests/UserAssignRoleRequest';
 import ChangeUserPasswordRequest from '../../Requests/ChangeUserPasswordRequest';
 import ChangeMyPasswordRequest from '../../Requests/ChangeMyPasswordRequest';
 
-import IUserDomain from '../../../InterfaceAdapters/IUserDomain';
+import IUserDomain from '../../../Domain/Entities/IUserDomain';
 import UserController from '../../Controllers/UserControllers';
 import UserSaveRequest from '../../Requests/UserSaveRequest';
 import { AuthUser } from '../../../../Auth/Presentation/Helpers/AuthUser';
 import ITokenDecode from '../../../../Shared/InterfaceAdapters/ITokenDecode';
-
+import ResponseData from '../../../../App/Presentation/Transformers/Response/DataResponseMessage';
+import ResponseMessageEnum from '../../../../App/Domain/Enum/ResponseMessageEnum';
+import ResponseTransformer from '../../../../App/Presentation/Transformers/DefaultMessageTransformer';
 @controller('/api/users')
 class UserHandler
 {
@@ -42,8 +44,8 @@ class UserHandler
         const _request = new UserSaveRequest(req.body);
 
         const user: IUserDomain = await this.controller.save(_request);
-
-        this.responder.send(user, req, res, StatusCode.HTTP_CREATED, new UserTransformer());
+        const responseData = new ResponseData(user.getId(), ResponseMessageEnum.CREATED);
+        void await this.responder.send(responseData, req, res, StatusCode.HTTP_CREATED, new ResponseTransformer());
     }
 
     @httpGet('/', AuthorizeMiddleware(Permissions.USERS_LIST))
@@ -59,11 +61,11 @@ class UserHandler
     @httpGet('/:id', AuthorizeMiddleware(Permissions.USERS_SHOW))
     public async getOne(@request() req: Request, @response() res: Response): Promise<void>
     {
-        const _request = new IdRequest(req.params.id);
+        const _request = new IdRequest({ id: req.params.id });
 
         const user: IUserDomain = await this.controller.getOne(_request);
 
-        this.responder.send(user, req, res, StatusCode.HTTP_OK, new UserTransformer());
+        void await this.responder.send(user, req, res, StatusCode.HTTP_OK, new UserTransformer());
     }
 
     @httpPut('/:id', AuthorizeMiddleware(Permissions.USERS_UPDATE))
@@ -72,8 +74,8 @@ class UserHandler
         const _request = new UserUpdateRequest(req.body, req.params.id, AuthUser<ITokenDecode>(req, 'tokenDecode').userId);
 
         const user: IUserDomain = await this.controller.update(_request);
-
-        this.responder.send(user, req, res, StatusCode.HTTP_CREATED, new UserTransformer());
+        const responseData = new ResponseData(user.getId(), ResponseMessageEnum.CREATED);
+        void await this.responder.send(responseData, req, res, StatusCode.HTTP_CREATED, new ResponseTransformer());
     }
 
     @httpPut('/assign-role/:id', AuthorizeMiddleware(Permissions.USERS_ASSIGN_ROLE))
@@ -82,18 +84,18 @@ class UserHandler
         const _request = new UserAssignRoleRequest(req.body, req.params.id);
 
         const _response: IUserDomain = await this.controller.assignRole(_request);
-
-        this.responder.send(_response, req, res, StatusCode.HTTP_CREATED, new UserTransformer());
+        const responseData = new ResponseData(_response.getId(), ResponseMessageEnum.UPDATED);
+        void await this.responder.send(responseData, req, res, StatusCode.HTTP_CREATED, new ResponseTransformer());
     }
 
     @httpDelete('/:id', AuthorizeMiddleware(Permissions.USERS_DELETE))
     public async remove(@request() req: Request, @response() res: Response): Promise<void>
     {
-        const _request = new IdRequest(req.params.id);
+        const _request = new IdRequest({ id: req.params.id });
 
         const data = await this.controller.remove(_request);
 
-        this.responder.send(data, req, res, StatusCode.HTTP_OK, new UserTransformer());
+        void await this.responder.send(data, req, res, StatusCode.HTTP_OK, new UserTransformer());
     }
 
     @httpPost('/change-my-password', AuthorizeMiddleware(Permissions.USERS_CHANGE_MY_PASSWORD))
@@ -102,8 +104,7 @@ class UserHandler
         const _request = new ChangeMyPasswordRequest(req.body, AuthUser<ITokenDecode>(req, 'tokenDecode').userId);
 
         const user: IUserDomain = await this.controller.changeMyPassword(_request);
-
-        this.responder.send(user, req, res, StatusCode.HTTP_CREATED, new UserTransformer());
+        void await this.responder.send(user, req, res, StatusCode.HTTP_CREATED, new UserTransformer());
     }
 
     @httpPut('/change-user-password/:id', AuthorizeMiddleware(Permissions.USERS_CHANGE_USER_PASSWORD))
@@ -112,8 +113,8 @@ class UserHandler
         const _request = new ChangeUserPasswordRequest(req.body, req.params.id);
 
         const user: IUserDomain = await this.controller.changeUserPassword(_request);
-
-        this.responder.send(user, req, res, StatusCode.HTTP_CREATED, new UserTransformer());
+        const responseData = new ResponseData(user.getId(), ResponseMessageEnum.UPDATED);
+        void await this.responder.send(responseData, req, res, StatusCode.HTTP_CREATED, new ResponseTransformer());
     }
 }
 

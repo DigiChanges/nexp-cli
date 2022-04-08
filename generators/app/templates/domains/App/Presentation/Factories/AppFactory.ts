@@ -1,6 +1,6 @@
-import IApp from '../../InterfaceAdapters/IApp';<% if (http == 'Express') { %>
-import AppExpress from '../Shared/Express/AppExpress';<% } %><% if (http == 'Koa') { %>
-import AppKoa from '../Shared/Koa/AppKoa';<% } %>
+import IApp from '../../InterfaceAdapters/IApp';
+import AppExpress from '../Shared/Express/AppExpress';
+import AppKoa from '../Shared/Koa/AppKoa';
 import IAppConfig from '../../InterfaceAdapters/IAppConfig';
 
 class AppFactory
@@ -8,7 +8,8 @@ class AppFactory
     static create(appName = 'AppExpress', config: IAppConfig): IApp
     {
         const strategy: Record<string, any> = {
-            App<%= http %>: App<%= http %>
+            [AppExpress.name]: AppExpress,
+            [AppKoa.name]: AppKoa
         };
 
         return new strategy[appName](config);

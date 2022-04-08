@@ -2,11 +2,11 @@ import MainConfig from '../../Config/mainConfig';
 import { v4 as uuidv4 } from 'uuid';
 import { ITokenRepository } from '@digichanges/shared-experience';
 
-import JWTToken from '../../Auth/Shared/JWTToken';
-import IToken from '../../Auth/InterfaceAdapters/IToken';
-import IUserDomain from '../../User/InterfaceAdapters/IUserDomain';
+import JWTToken from '../../Auth/Domain/Models/JWTToken';
+import IToken from '../../Auth/Domain/Models/IToken';
+import IUserDomain from '../../User/Domain/Entities/IUserDomain';
 import { REPOSITORIES } from '../../Config/Injects/repositories';
-import ITokenDomain from '../../Auth/InterfaceAdapters/ITokenDomain';
+import ITokenDomain from '../../Auth/Domain/Entities/ITokenDomain';
 import Token from '../../Auth/Domain/Entities/Token';
 import { containerFactory } from '../Decorators/ContainerFactory';
 
@@ -18,13 +18,10 @@ class TokenFactory
 
     public async createToken(user: IUserDomain): Promise<IToken>
     {
-        const config = MainConfig.getInstance();
+        const jwtConfig = MainConfig.getInstance().getConfig().jwt;
 
-        const expires: number = config.getConfig().jwt.expires;
-        const secret: string = config.getConfig().jwt.secret;
         const id = uuidv4();
-
-        const jWTToken = new JWTToken(id, expires, user, secret);
+        const jWTToken = new JWTToken(id, user, jwtConfig);
 
         const token: ITokenDomain = new Token();
         token.setId(id);

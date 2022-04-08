@@ -7,7 +7,7 @@ import {
     Transformer
 } from '@digichanges/shared-experience';
 import { TYPES } from '../../../../Config/Injects/types';
-import IFileDTO from '../../../../File/InterfaceAdapters/Payloads/IFileDTO';
+import IFileDTO from '../../../../File/Domain/Models/IFileDTO';
 import IFormatResponder from '../../../../Shared/InterfaceAdapters/IFormatResponder';
 
 @injectable()
@@ -16,7 +16,7 @@ class Responder
     @inject(TYPES.IFormatResponder)
     private formatResponder: IFormatResponder;
 
-    public send(data: any, request: Request | any, response: Response, status: IHttpStatusCode, transformer: Transformer = null)
+    public async send(data: any, request: Request | any, response: Response, status: IHttpStatusCode, transformer: Transformer = null)
     {
         let metadata = null;
 
@@ -32,9 +32,9 @@ class Responder
             return response.status(status.code).send({ data: { ...data, metadata } });
         }
 
-        data = transformer.handle(data);
+        data = await transformer.handle(data);
 
-        response.status(status.code).send(this.formatResponder.getFormatData(data, status, metadata));
+        response.status(status.code).send(this.formatResponder.getFormatData(data, metadata));
     }
 
     // TODO: Refactor to encapsulate this logic
@@ -42,7 +42,7 @@ class Responder
     {
         const data = await paginator.paginate();
         const metadata = paginator.getMetadata();
-        const result = this.formatResponder.getFormatData(data, status, metadata);
+        const result = this.formatResponder.getFormatData(data, metadata);
 
         if (!transformer)
         {
@@ -53,12 +53,12 @@ class Responder
                 });
         }
 
-        result.data = transformer.handle(data);
+        result.data = await transformer.handle(data);
 
         if (paginator.getExist())
         {
             const paginatorTransformer = new PaginatorTransformer();
-            paginator = paginatorTransformer.handle(paginator);
+            paginator = await paginatorTransformer.handle(paginator);
 
             const pagination = { pagination: paginator };
 

@@ -2,6 +2,8 @@
   "env": "production",
   "nodePath": "/home/node/app",
   "serverPort": 80,
+  "setCookieSecure": true,
+  "setCookieSameSite": "none",
     "auth": {
       "authorization": true
   },
@@ -49,8 +51,10 @@
       "secretKey": "12345678",
       "useSSL": false,
       "port": 9000,
-      "region": "us-east-1",
-      "bucket": "experience"
+      "publicBucket": "experience",
+      "privateBucket": "experience",
+      "rootPath": "",
+      "region": "us-east-1"
     },
     "local": {
       "type": "local"
@@ -108,10 +112,6 @@
     {
       "methods": ["POST"],
       "url": "/api/auth/signup"
-    },
-    {
-      "methods": ["POST"],
-      "url": "/api/auth/forgotPassword"
     },
     {
       "methods": ["POST"],

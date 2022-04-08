@@ -41,7 +41,7 @@ services:
     volumes:
       - data:/var/lib/postgresql/data <% } %> <% if (orm == 'Mongoose') { %>
     volumes:
-      - data:/bitnami/mongodb <% } %><% if (fileDomain) { %>
+      - data:/bitnami/mongodb <% } %>
 
   mail:
     container_name: experience_mail_1
@@ -50,7 +50,7 @@ services:
     ports:
       - "8025:8025"
     networks:
-     - experiencenet <% } %>
+     - experiencenet <% if (fileDomain) { %>
 
   minio:
     container_name: experience_minio_1
@@ -67,7 +67,7 @@ services:
       MINIO_DOMAIN: localhost
     volumes:
       - minio:/data
-    command: server --address 0.0.0.0:9000 --console-address 0.0.0.0:9001 /data
+    command: server --address 0.0.0.0:9000 --console-address 0.0.0.0:9001 /data <% } %>
 
   redis:
     image: bitnami/redis:latest
