@@ -18,7 +18,7 @@ npm install -g generator-nexp-cli
 Then generate your new project:
 
 ```bash
-yo nexp-cli
+yo generator-nexp-cli
 ```
 
 ## Step by Step
