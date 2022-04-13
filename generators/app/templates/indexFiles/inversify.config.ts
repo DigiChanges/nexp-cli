@@ -8,6 +8,7 @@ import Responder from './App/Presentation/Shared/Express/Responder';<% } %>
 import IUserRepository from './User/Infrastructure/Repositories/IUserRepository';
 import IRoleRepository from './Role/Infrastructure/Repositories/IRoleRepository';<% if (fileDomain) { %>
 import IFileRepository from './File/Infrastructure/Repositories/IFileRepository';<% } %>
+import INotificationRepository from './Notification/Infrastructure/Repositories/INotificationRepository';
 
 import { REPOSITORIES } from './Config/Injects/repositories';
 import { TYPES } from './Config/Injects/types';
@@ -16,23 +17,25 @@ import { TYPES } from './Config/Injects/types';
 import UserMongoRepository from './User/Infrastructure/Repositories/UserMongoRepository';
 import RoleMongoRepository from './Role/Infrastructure/Repositories/RoleMongoRepository';<% if (fileDomain) { %>
 import FileMongoRepository from './File/Infrastructure/Repositories/FileMongoRepository';<% } %>
+import NotificationMongoRepository from './Notification/Infrastructure/Repositories/NotificationMongoRepository';
 <% } %><% if (orm == "TypeORM") { %>
 import UserSqlRepository from './User/Infrastructure/Repositories/UserSqlRepository';<% if (fileDomain) { %>
 import FileSqlRepository from './File/Infrastructure/Repositories/FileSqlRepository';<% } %>
 import RoleSqlRepository from './Role/Infrastructure/Repositories/RoleSqlRepository';
+// import NotificationSqlRepository from './Notification/Infrastructure/Repositories/NotificationSqlRepository';
 <% } %><% if (orm == "MikroORM") { %>
 import RoleMikroSqlRepository from './Role/Infrastructure/Repositories/RoleMikroSqlRepository';
 import UserMikroSqlRepository from './User/Infrastructure/Repositories/UserMikroSqlRepository';<% if (fileDomain) { %>
-import FileMikroSqlRepository from './File/Infrastructure/Repositories/FileMikroSqlRepository';<% } %><% } %>
+import FileMikroSqlRepository from './File/Infrastructure/Repositories/FileMikroSqlRepository';<% } %>
+// import NotificationSqlRepository from './Notification/Infrastructure/Repositories/NotificationMikroSqlRepository';
+<% } %>
 
 import TokenRedisRepository from './Auth/Infrastructure/Repositories/TokenRedisRepository';
 
 import { ITokenRepository } from '@digichanges/shared-experience';
 
 import ITokenDomain from './Auth/Domain/Entities/ITokenDomain';
-import INotificationRepository from './Notification/Infrastructure/Repositories/INotificationRepository';
 import INotificationDomain from './Notification/Domain/Entities/INotificationDomain';
-import NotificationMongoRepository from './Notification/Infrastructure/Repositories/NotificationMongoRepository';
 import INotificationFactory from './Notification/Shared/INotificationFactory';
 import { FACTORIES } from './Config/Injects/factories';
 import NotificationFactory from './Notification/Shared/NotificationFactory';
@@ -47,6 +50,7 @@ container.bind<IFormatResponder>(TYPES.IFormatResponder).to(FormatResponder);
 container.bind<IUserRepository>(REPOSITORIES.IUserRepository).to(UserSqlRepository);
 container.bind<IRoleRepository>(REPOSITORIES.IRoleRepository).to(RoleSqlRepository);<% if (fileDomain) { %>
 container.bind<IFileRepository>(REPOSITORIES.IFileRepository).to(FileSqlRepository);<% } %>
+// container.bind<INotificationRepository<INotificationDomain>>(REPOSITORIES.INotificationRepository).to(NotificationMongoRepository);
 <% } %><% if (orm == "MikroORM") { %>
 container.bind<IRoleRepository>(REPOSITORIES.IRoleRepository).to(RoleMikroSqlRepository);
 container.bind<IUserRepository>(REPOSITORIES.IUserRepository).to(UserMikroSqlRepository);<% if (fileDomain) { %>

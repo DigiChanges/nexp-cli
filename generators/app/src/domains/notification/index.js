@@ -7,8 +7,8 @@ module.exports = function (data)
 
   if (props.orm !== "TypeORM")
   {
-    data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Repositories/NotificationSqlRepository.ts"))
-    data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Schemas/NotificationTypeORM.ts"))
+    // data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Repositories/NotificationSqlRepository.ts"))
+    // data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Schemas/NotificationTypeORM.ts"))
   }
   if (props.orm !== "Mongoose")
   {
@@ -17,8 +17,8 @@ module.exports = function (data)
   }
   if (props.orm !== "MikroORM")
   {
-    data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Repositories/NotificationMikroSqlRepository.ts"))
-    data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Schemas/NotificationMikroORM.ts"))
+    // data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Repositories/NotificationMikroSqlRepository.ts"))
+    // data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Schemas/NotificationMikroORM.ts"))
   }
 
   if (props.http !== "Express")
