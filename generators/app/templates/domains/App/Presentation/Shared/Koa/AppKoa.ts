@@ -11,7 +11,6 @@ import Locales from '../Locales';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import IndexHandler from '../../Handlers/Koa/IndexHandler';
-import ItemHandler from '../../../../Item/Presentation/Handlers/Koa/ItemHandler';
 import RoleHandler from '../../../../Role/Presentation/Handlers/Koa/RoleHandler';
 import UserHandler from '../../../../User/Presentation/Handlers/Koa/UserHandler';
 import NotificationHandler from '../../../../Notification/Presentation/Handlers/Koa/NotificationHandler';
@@ -20,9 +19,9 @@ import AuthHandler from '../../../../Auth/Presentation/Handlers/Koa/AuthHandler'
 import IAppConfig from '../../../InterfaceAdapters/IAppConfig';
 import WhiteListHandler from '../../../Tests/Koa/WhiteListHandler';
 import { ErrorHandler } from './ErrorHandler';
-import MainConfig from '../../../../Config/mainConfig';
+import MainConfig from '../../../../Config/mainConfig';<% if (orm == 'MikroORM') { %>
 import { RequestContext } from '@mikro-orm/core';
-import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';
+import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';<% } %>
 import LoggerMiddleware from '../../Middlewares/Koa/LoggerMiddleware';
 import Logger from '../../../../Shared/Logger/Logger';
 
@@ -60,10 +59,11 @@ class AppKoa implements IApp
             jsonLimit: '5mb'
         }));
 
+<% if (orm == 'MikroORM') { %>
         if (MainConfig.getInstance().getConfig().dbConfig.default === 'MikroORM')
         {
             this.app.use((ctx, next) => RequestContext.createAsync(orm.em, next));
-        }
+        }<% } %>
 
         this.app.use(LoggerMiddleware);
         this.app.use(Throttle);
@@ -79,9 +79,6 @@ class AppKoa implements IApp
 
         this.app.use(WhiteListHandler.routes());
         this.app.use(WhiteListHandler.allowedMethods());
-
-        this.app.use(ItemHandler.routes());
-        this.app.use(ItemHandler.allowedMethods());
 
         this.app.use(RoleHandler.routes());
         this.app.use(RoleHandler.allowedMethods());

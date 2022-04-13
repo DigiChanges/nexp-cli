@@ -8,7 +8,7 @@ module.exports = function (data)
   if (props.orm !== "TypeORM")
   {
     // data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Repositories/NotificationSqlRepository.ts"))
-    // data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Schemas/NotificationTypeORM.ts"))
+    data.deleteDestination(data.destinationPath("src/Notification/Infrastructure/Schemas/NotificationTypeORM.ts"))
   }
   if (props.orm !== "Mongoose")
   {

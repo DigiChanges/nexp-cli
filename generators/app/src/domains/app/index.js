@@ -18,7 +18,7 @@ module.exports = function (data)
   if (props.orm !== "MikroORM")
   {
     data.deleteDestination(data.destinationPath("src/App/Infrastructure/Repositories/BaseMikroSqlRepository.ts"));
-    data.deleteDestination(data.destinationPath("src/App/Presentation/Commands/SincronizeMikroORM.ts"));
+    data.deleteDestination(data.destinationPath("src/App/Presentation/Commands/SynchronizeMikroORM.ts"));
     data.deleteDestination(data.destinationPath("src/App/Presentation/Shared/MikroPaginator.ts"));
   }
 
