@@ -12,7 +12,7 @@ import TokenSqlRepository from './Auth/Infrastructure/Repositories/TokenSqlRepos
 import TokenMikroSqlRepository from './Auth/Infrastructure/Repositories/TokenMikroSqlRepository';<% } %>
 import { validateEnv } from './Config/validateEnv';
 import container from './inversify.config';
-import ITokenDomain from './Auth/InterfaceAdapters/ITokenDomain';
+import ITokenDomain from './Auth/Domain/Entities/ITokenDomain';
 import SeedFactory from './Shared/Factories/SeedFactory';
 import AppFactory from './App/Presentation/Factories/AppFactory';
 import Locales from './App/Presentation/Shared/Locales';

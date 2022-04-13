@@ -1,4 +1,4 @@
-import IGroupPermission from '../Auth/InterfaceAdapters/IGroupPermission';
+import IGroupPermission from './IGroupPermission';
 
 class Permissions
 {
@@ -16,7 +16,7 @@ class Permissions
     static readonly USERS_DELETE: string = 'usersDelete';
     static readonly USERS_ASSIGN_ROLE: string = 'usersAssignRole';
     static readonly USERS_CHANGE_MY_PASSWORD: string = 'usersChangeMyPassword';
-    static readonly USERS_CHANGE_USER_PASSWORD:string = 'usersChangeUserPassword';<% if (fileDomain) { %>
+    static readonly USERS_CHANGE_USER_PASSWORD: string = 'usersChangeUserPassword';<% if (fileDomain) { %>
 
     // FILES
     static readonly FILES_UPLOAD: string = 'filesUpload';
@@ -41,16 +41,6 @@ class Permissions
                 permissions: [
                     Permissions.AUTH_SYNC_PERMISSIONS,
                     Permissions.GET_PERMISSIONS
-                ]
-            },
-            {
-                group: 'ITEMS',
-                permissions: [
-                    Permissions.ITEMS_SAVE,
-                    Permissions.ITEMS_UPDATE,
-                    Permissions.ITEMS_SHOW,
-                    Permissions.ITEMS_LIST,
-                    Permissions.ITEMS_DELETE
                 ]
             },
             {
