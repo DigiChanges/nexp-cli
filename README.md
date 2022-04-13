@@ -12,13 +12,13 @@ First, install [Yeoman](http://yeoman.io) and nexp-cli using [npm](https://www.n
 
 ```bash
 npm install -g yo
-npm install -g @digichanges/nexp-cli
+npm install -g generator-nexp-cli
 ```
 
 Then generate your new project:
 
 ```bash
-yo nexp-cli
+yo generator-nexp-cli
 ```
 
 ## Step by Step
