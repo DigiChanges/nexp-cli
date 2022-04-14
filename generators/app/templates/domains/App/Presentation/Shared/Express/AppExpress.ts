@@ -6,7 +6,6 @@ import helmet from 'helmet';
 import exphbs from 'express-handlebars';
 
 import '../../Handlers/Express/IndexHandler';
-import '../../../../Item/Presentation/Handlers/Express/ItemHandler';
 import '../../../../User/Presentation/Handlers/Express/UserHandler';
 import '../../../../Auth/Presentation/Handlers/Express/AuthHandler';
 import '../../../../Role/Presentation/Handlers/Express/RoleHandler';
@@ -24,9 +23,9 @@ import IApp from '../../../InterfaceAdapters/IApp';
 import Locales from '../Locales';
 import IAppConfig from '../../../InterfaceAdapters/IAppConfig';
 import Logger from '../../../../Shared/Logger/Logger';
-import MainConfig from '../../../../Config/mainConfig';
+import MainConfig from '../../../../Config/mainConfig';<% if (orm == 'MikroORM') { %>
 import { RequestContext } from '@mikro-orm/core';
-import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';
+import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';<% } %>
 import LoggerMiddleware from '../../Middlewares/Express/LoggerMiddleware';
 
 class AppExpress implements IApp
@@ -69,13 +68,14 @@ class AppExpress implements IApp
             }));
             app.set('view engine', '.hbs');
 
+<% if (orm == 'MikroORM') { %>
             if (MainConfig.getInstance().getConfig().dbConfig.default === 'MikroORM')
             {
                 app.use((req, res, next) =>
                 {
                     RequestContext.create(orm.em, next);
                 });
-            }
+            }<% } %>
 
             app.use(LoggerMiddleware);
             app.use('/api/', Throttle);

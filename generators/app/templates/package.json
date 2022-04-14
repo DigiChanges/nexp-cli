@@ -84,8 +84,8 @@
     "koa-helmet": "^6.1.0",<% } %><% if (http == 'Koa') { %>
     "koa-qs": "^3.0.0",<% } %><% if (http == 'Koa') { %>
     "koa-ratelimit": "^5.0.1",<% } %><% if (http == 'Koa') { %>
-    "koa-router": "^10.0.0",<% } %><% if (http == 'Koa') { %>
-    "lodash": "^4.17.21",<% } %>
+    "koa-router": "^10.0.0",<% } %>
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "minio": "^7.0.18",
     "moment": "^2.29.1",<% if (orm == 'Mongoose') { %>

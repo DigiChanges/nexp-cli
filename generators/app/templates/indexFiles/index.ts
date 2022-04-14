@@ -32,7 +32,9 @@ void (async() =>
         const cronFactory = new CronFactory();
         cronFactory.start();
 
-        const app = AppFactory.create('AppKoa', {
+<% if (http == "Express") { %>
+        const app = AppFactory.create('AppExpress', {<% } %><% if (http == "Koa") { %>
+        const app = AppFactory.create('AppKoa', {<% } %>
             viewRouteEngine: `${process.cwd()}/dist/src/App/Presentation/Views`,
             localesDirectory: `${process.cwd()}/dist/src/Config/Locales`,
             serverPort: config.getConfig().serverPort
