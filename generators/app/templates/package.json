@@ -102,9 +102,9 @@
     "reflect-metadata": "^0.1.13",
     "shelljs": "^0.8.4",
     "tedis": "^0.1.12",
-    "ts-mixer": "^6.0.0",<% if (orm == 'TypeORM') { %>
-    "tslog": "^3.3.3",
-    "typeorm": "^0.2.38",<% } %>
+    "ts-mixer": "^6.0.0",
+    "tslog": "^3.3.3",<% if (orm == 'TypeORM') { %>
+    "typeorm": "^0.3.3",<% } %>
     "uuid": "^8.3.2",
     "web-push": "^3.4.4"
   },
