@@ -136,8 +136,8 @@
     "@types/koa-hbs": "^1.0.7",<% } %><% if (http == 'Koa') { %>
     "@types/koa-ratelimit": "^4.2.3",<% } %><% if (http == 'Koa') { %>
     "@types/koa-router": "^7.4.2",<% } %><% if (http == 'Koa') { %>
-    "@types/koa__multer": "^2.0.3",<% } %><% if (http == 'Koa') { %>
-    "@types/lodash": "^4.14.168",<% } %>
+    "@types/koa__multer": "^2.0.3",<% } %>
+    "@types/lodash": "^4.14.181",
     "@types/md5": "^2.3.0",
     "@types/minio": "^7.0.7",<% if (orm == 'Mongoose') { %>
     "@types/mongodb": "^4.0.7",<% } %><% if (orm == 'Mongoose') { %>
