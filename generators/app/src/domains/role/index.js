@@ -14,6 +14,7 @@ module.exports = function (data)
   {
     data.deleteDestination(data.destinationPath("src/Role/Infrastructure/Repositories/RoleMongoRepository.ts"))
     data.deleteDestination(data.destinationPath("src/Role/Infrastructure/Schemas/RoleMongoose.ts"))
+    data.deleteDestination(data.destinationPath("src/Role/Infrastructure/Schemas/IRoleDocument.ts"))
   }
   if (props.orm !== "MikroORM")
   {

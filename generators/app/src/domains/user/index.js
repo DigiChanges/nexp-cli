@@ -14,6 +14,7 @@ module.exports = function (data)
   {
     data.deleteDestination(data.destinationPath("src/User/Infrastructure/Repositories/UserMongoRepository.ts"))
     data.deleteDestination(data.destinationPath("src/User/Infrastructure/Schemas/UserMongoose.ts"))
+    data.deleteDestination(data.destinationPath("src/User/Infrastructure/Schemas/IUserDocument.ts"))
   }
   if (props.orm !== "MikroORM")
   {
