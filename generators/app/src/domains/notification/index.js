@@ -28,6 +28,6 @@ module.exports = function (data)
   }
   if(props.http !== "Koa")
   {
-    data.deleteDestination(data.destinationPath("src/Auth/Presentation/Handlers/Koa"))
+    data.deleteDestination(data.destinationPath("src/Notification/Presentation/Handlers/Koa"))
   }
 }
