@@ -2,6 +2,8 @@
   "env": "test",
   "nodePath": "/home/node/app",
   "serverPort": 8089,
+  "setCookieSecure": false,
+  "setCookieSameSite": "none",
   "auth": {
     "authorization": true
   },
@@ -15,21 +17,7 @@
       "password": "<%= projectName %>",
       "synchronize": true,
       "migrationsRun": false,
-      "logging": true,
-      "entities": [
-        "src/Infrastructure/Schema/TypeORM/*.ts"
-      ],
-      "migrations": [
-        "src/Infrastructure/Migrations/TypeORM/**/*.ts"
-      ],
-      "subscribers": [
-        "src/Infrastructure/Subscribers/TypeORM/**/*.ts"
-      ],
-      "cli": {
-        "entitiesDir": "/src/Infrastructure/Entities/TypeORM",
-        "migrationsDir": "/src/Infrastructure/Migrations",
-        "subscribersDir": "/src/Infrastructure/Subscribers"
-      }
+      "logging": true
     },
     "Mongoose": {
       "host": "db",
@@ -106,7 +94,7 @@
     "urlWeb": "http://localhost:3000/"
   },
   "productInfo": {
-    "productName": "experience"
+    "productName": "<%= projectName %>"
   },
   "validationSettings": {
     "password": {

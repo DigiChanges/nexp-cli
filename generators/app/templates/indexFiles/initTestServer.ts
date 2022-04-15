@@ -19,7 +19,6 @@ import Locales from './App/Presentation/Shared/Locales';
 import { FACTORIES } from './Config/Injects/factories';
 import INotificationFactory from './Notification/Shared/INotificationFactory';
 import MockNotificationFactory from './Notification/Tests/MockNotificationFactory';
-import MainConfig from './Config/mainConfig';
 
 const initTestServer = async(): Promise<any> =>
 {
@@ -36,8 +35,6 @@ const initTestServer = async(): Promise<any> =>
 
     void Locales.getInstance();
 
-    const mainConfig = MainConfig.getInstance();
-
     container.unbind(REPOSITORIES.ITokenRepository);<% if (orm == 'Mongoose') { %>
     container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenMongoRepository);<% } %><% if (orm == 'TypeORM') { %>
     container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenSqlRepository);<% } %><% if (orm == 'MikroORM') { %>
@@ -46,7 +43,9 @@ const initTestServer = async(): Promise<any> =>
     container.unbind(FACTORIES.INotificationFactory);
     container.bind<INotificationFactory>(FACTORIES.INotificationFactory).to(MockNotificationFactory);
 
-    const app = AppFactory.create('AppKoa', {
+<% if (http == "Express") { %>
+        const app = AppFactory.create('AppExpress', {<% } %><% if (http == "Koa") { %>
+        const app = AppFactory.create('AppKoa', {<% } %>
         viewRouteEngine: `${process.cwd()}/dist/src/App/Presentation/Views`,
         localesDirectory: `${process.cwd()}/dist/src/Config/Locales`,
         serverPort: 8088
