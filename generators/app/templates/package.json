@@ -45,7 +45,7 @@
   "author": "Digichanges",
   "license": "MIT",
   "dependencies": {
-    "@digichanges/shared-experience": "^0.7.1", <% if (http == 'Koa') { %>
+    "@digichanges/shared-experience": "^0.8.0", <% if (http == 'Koa') { %>
     "@koa/multer": "^3.0.0",<% } %><% if (orm == 'MikroORM') { %>
     "@mikro-orm/core": "^5.1.2",
     "@mikro-orm/postgresql": "^5.1.2",<% } %>
