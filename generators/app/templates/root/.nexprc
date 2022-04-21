@@ -1,0 +1,6 @@
+{
+  "projectName": "<%= projectName %>",
+  "fileDomain": <%= fileDomain %>,
+  "orm": "<%= orm %>",
+  "http": "<%= http %>"
+}
