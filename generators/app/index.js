@@ -7,6 +7,7 @@ const yosay = require("yosay");
 const packagejson = require("./src/packagejson");
 const root = require("./src/root");
 const indexFiles = require("./src/indexFiles");
+const gitignore = require("./src/gitignore");
 const app = require("./src/domains/app");
 const auth = require("./src/domains/auth");
 const config = require("./src/domains/config");
@@ -86,6 +87,7 @@ module.exports = class extends Generator {
       root(this);
       packagejson(this);
       indexFiles(this);
+      gitignore(this);
       app(this);
       auth(this);
       config(this);

@@ -87,7 +87,7 @@
     "koa-router": "^10.0.0",<% } %>
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
-    "minio": "^7.0.18",
+    "minio": "7.0.26",
     "moment": "^2.29.1",<% if (orm == 'Mongoose') { %>
     "mongodb": "4.2.2",<% } %><% if (orm == 'Mongoose') { %>
     "mongoose": "^6.1.5",<% } %>
