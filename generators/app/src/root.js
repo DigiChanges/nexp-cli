@@ -1,11 +1,13 @@
 
 module.exports = function root(data)
 {
+  const projectName = data.props.projectName.replace(/[^\w\s]/gi, '_');
+
   data.fs.copyTpl(
     data.templatePath("root/*"),
     data.destinationPath("./"),
     {
-      projectName: data.props.projectName,
+      projectName,
       http: data.props.http,
       orm: data.props.orm,
       fileDomain: data.props.fileDomain
@@ -16,7 +18,7 @@ module.exports = function root(data)
     data.templatePath("root/config"),
     data.destinationPath("config"),
     {
-      projectName: data.props.projectName,
+      projectName,
       http: data.props.http,
       orm: data.props.orm,
       fileDomain: data.props.fileDomain
@@ -27,7 +29,7 @@ module.exports = function root(data)
     data.templatePath("root/docker"),
     data.destinationPath("docker"),
     {
-      projectName: data.props.projectName,
+      projectName,
       http: data.props.http,
       orm: data.props.orm,
       fileDomain: data.props.fileDomain
@@ -38,7 +40,7 @@ module.exports = function root(data)
     data.templatePath("root/infrastructure"),
     data.destinationPath("infrastructure"),
     {
-      projectName: data.props.projectName,
+      projectName,
       http: data.props.http,
       orm: data.props.orm,
       fileDomain: data.props.fileDomain
@@ -49,7 +51,7 @@ module.exports = function root(data)
     data.templatePath("root/tools"),
     data.destinationPath("tools"),
     {
-      projectName: data.props.projectName,
+      projectName,
       http: data.props.http,
       orm: data.props.orm,
       fileDomain: data.props.fileDomain
@@ -60,7 +62,7 @@ module.exports = function root(data)
     data.templatePath("root/.*"),
     data.destinationRoot(),
     {
-      projectName: data.props.projectName,
+      projectName,
       http: data.props.http,
       orm: data.props.orm,
       fileDomain: data.props.fileDomain

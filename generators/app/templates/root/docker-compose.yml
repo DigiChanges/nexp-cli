@@ -2,20 +2,21 @@ version: '3.4'
 
 services:
   node:
-    container_name: experience_node_1
-    restart: always
-    image: digichanges/nexp:1.0
-    working_dir: /usr/app
-    entrypoint: bash dev.build.sh
+    container_name: <%= projectName %>_node_1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    working_dir: /home/node/app
     volumes:
-     - .:/usr/app:cached
+     - .:/home/node/app:cached
     ports:
       - "8089:8089"
     networks:
-     - experiencenet
+     - <%= projectName %>net
 
   db:
-    container_name: experience_db_1
+    container_name: <%= projectName %>_db_1
     restart: always <% if (orm == 'Mongoose') { %>
     build:
       context: docker/mongo/
@@ -28,7 +29,7 @@ services:
     ports:
       - "5433:5432" <% } %>
     networks:
-     - experiencenet <% if (orm == 'Mongoose') { %>
+     - <%= projectName %>net <% if (orm == 'Mongoose') { %>
     environment:
       MONGODB_ROOT_PASSWORD: 123456
       MONGODB_USERNAME: <%= projectName %>
@@ -44,23 +45,23 @@ services:
       - data:/bitnami/mongodb <% } %>
 
   mail:
-    container_name: experience_mail_1
+    container_name: <%= projectName %>_mail_1
     restart: always
     image: mailhog/mailhog:latest
     ports:
       - "8025:8025"
     networks:
-     - experiencenet <% if (fileDomain) { %>
+     - "<%= projectName %>net" <% if (fileDomain) { %>
 
   minio:
-    container_name: experience_minio_1
+    container_name: <%= projectName %>_minio_1
     restart: always
     image: minio/minio
     ports:
       - "9000:9000"
       - "9001:9001"
     networks:
-     - experiencenet
+     - "<%= projectName %>net"
     environment:
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: 12345678
@@ -72,19 +73,19 @@ services:
   redis:
     image: bitnami/redis:latest
     restart: always
-    container_name: experience_redis_1
+    container_name: <%= projectName %>_redis_1
     environment:
       - REDIS_PASSWORD=ewsua132435 # Security reasons
       - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG # Security reasons
     ports:
       - "6379:6379"
     networks:
-     - experiencenet
+     - "<%= projectName %>net"
     volumes:
       - redis:/bitnami/redis/data
 
 networks:
-  experiencenet:
+  <%= projectName %>net:
     driver: "bridge"
 
 volumes:
