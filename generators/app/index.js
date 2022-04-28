@@ -19,10 +19,16 @@ const user = require("./src/domains/user");
 const fs = require("fs");
 
 module.exports = class extends Generator {
-  prompting() {
+  async prompting() {
     this.log(yosay(`Welcome to the ${chalk.red("nexp-cli")} generator!`));
 
-    const prompts = [
+    const ormLists = ["Mongoose", "TypeORM", "MikroORM"];
+    const parsedOrms = ormLists.map(orm => ({name: orm, value: orm}));
+
+    const httpFrameworksList = ["Koa", "Express"];
+    const parsedhttpFrameworks = httpFrameworksList.map(framework => ({name: framework, value: framework}));
+
+    this.props = await this.prompt([
       {
         type: "input",
         name: "projectName",
@@ -39,44 +45,17 @@ module.exports = class extends Generator {
         type: "list",
         name: "orm",
         message: "Choose an ORM.",
-        choices: [
-          {
-            name: "Mongoose",
-            value: "Mongoose"
-          },
-          {
-            name: "TypeORM",
-            value: "TypeORM"
-          },
-          {
-            name: "MikroORM",
-            value: "MikroORM"
-          }
-        ],
+        choices: parsedOrms,
         default: "Mongoose"
       },
       {
         type: "list",
         name: "http",
         message: "Choose an HTTP Library.",
-        choices: [
-          {
-            name: "Koa",
-            value: "Koa"
-          },
-          {
-            name: "Express",
-            value: "Express"
-          }
-        ],
+        choices: parsedhttpFrameworks,
         default: "Koa"
       }
-    ];
-
-    return this.prompt(prompts).then(props => {
-      console.log(props);
-      this.props = props;
-    });
+    ])
   }
 
   writing() {
