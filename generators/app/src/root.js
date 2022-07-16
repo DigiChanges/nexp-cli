@@ -1,71 +1,31 @@
+module.exports = function root(data) {
+  const {
+    props: { fileDomain, http, orm, projectName: propsProjectName },
+    fs,
+  } = data;
 
-module.exports = function root(data)
-{
-  const projectName = data.props.projectName.replace(/[^\w\s]/gi, '_');
+  const projectName = propsProjectName.replace(/[^\w\s]/gi, '_');
 
-  data.fs.copyTpl(
-    data.templatePath("root/*"),
-    data.destinationPath("./"),
-    {
-      projectName,
-      http: data.props.http,
-      orm: data.props.orm,
-      fileDomain: data.props.fileDomain
-    }
-  );
+  const filesPaths = new Map();
 
-  data.fs.copyTpl(
-    data.templatePath("root/config"),
-    data.destinationPath("config"),
-    {
-      projectName,
-      http: data.props.http,
-      orm: data.props.orm,
-      fileDomain: data.props.fileDomain
-    }
-  );
+  const filesOptions = {
+    fileDomain,
+    http,
+    orm,
+    projectName,
+  };
 
-  data.fs.copyTpl(
-    data.templatePath("root/docker"),
-    data.destinationPath("docker"),
-    {
-      projectName,
-      http: data.props.http,
-      orm: data.props.orm,
-      fileDomain: data.props.fileDomain
-    }
-  );
+  filesPaths.set(data.templatePath('root/*'), { destinationPath: data.destinationPath('./'), ...filesOptions });
 
-  data.fs.copyTpl(
-    data.templatePath("root/infrastructure"),
-    data.destinationPath("infrastructure"),
-    {
-      projectName,
-      http: data.props.http,
-      orm: data.props.orm,
-      fileDomain: data.props.fileDomain
-    }
-  );
+  filesPaths.set(data.templatePath('root/config'), { destinationPath: data.destinationPath('config'), ...filesOptions });
 
-  data.fs.copyTpl(
-    data.templatePath("root/tools"),
-    data.destinationPath("tools"),
-    {
-      projectName,
-      http: data.props.http,
-      orm: data.props.orm,
-      fileDomain: data.props.fileDomain
-    }
-  );
+  filesPaths.set(data.templatePath('root/docker'), { destinationPath: data.destinationPath('docker'), ...filesOptions });
 
-  data.fs.copyTpl(
-    data.templatePath("root/.*"),
-    data.destinationRoot(),
-    {
-      projectName,
-      http: data.props.http,
-      orm: data.props.orm,
-      fileDomain: data.props.fileDomain
-    }
-  );
-}
+  filesPaths.set(data.templatePath('root/infrastructure'), { destinationPath: data.destinationPath('infrastructure'), ...filesOptions });
+
+  filesPaths.set(data.templatePath('root/tools'), { destinationPath: data.destinationPath('tools'), ...filesOptions });
+
+  filesPaths.set(data.templatePath('root/.*'), { destinationPath: data.destinationRoot(), ...filesOptions });
+
+  filesPaths.forEach((pathValue, pathKey) => fs.copyTpl(pathKey, pathValue.destinationPath, pathValue));
+};
