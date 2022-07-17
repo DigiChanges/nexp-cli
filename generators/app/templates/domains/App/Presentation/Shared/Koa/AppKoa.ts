@@ -1,16 +1,17 @@
 import cors from 'koa-cors';
 import helmet from 'koa-helmet';
 import hbshbs from 'koa-hbs';
+import { Server } from 'http';
 
 import AuthenticationMiddleware from '../../../../Auth/Presentation/Middlewares/Koa/AuthenticationMiddleware';
 import RedirectRouteNotFoundMiddleware from '../../Middlewares/Koa/RedirectRouteNotFoundMiddleware';
 import Throttle from '../../Middlewares/Koa/Throttle';
 import VerifyTokenMiddleware from '../../../../Auth/Presentation/Middlewares/Koa/VerifyTokenMiddleware';
 import IApp from '../../../InterfaceAdapters/IApp';
-import Locales from '../Locales';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import IndexHandler from '../../Handlers/Koa/IndexHandler';
+import ItemHandler from '../../../../Item/Presentation/Handlers/Koa/ItemHandler';
 import RoleHandler from '../../../../Role/Presentation/Handlers/Koa/RoleHandler';
 import UserHandler from '../../../../User/Presentation/Handlers/Koa/UserHandler';
 import NotificationHandler from '../../../../Notification/Presentation/Handlers/Koa/NotificationHandler';
@@ -19,9 +20,9 @@ import AuthHandler from '../../../../Auth/Presentation/Handlers/Koa/AuthHandler'
 import IAppConfig from '../../../InterfaceAdapters/IAppConfig';
 import WhiteListHandler from '../../../Tests/Koa/WhiteListHandler';
 import { ErrorHandler } from './ErrorHandler';
-import MainConfig from '../../../../Config/mainConfig';<% if (orm == 'MikroORM') { %>
+import MainConfig from '../../../../Config/mainConfig';
 import { RequestContext } from '@mikro-orm/core';
-import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';<% } %>
+import { orm } from '../../../../Shared/Database/MikroORMCreateConnection';
 import LoggerMiddleware from '../../Middlewares/Koa/LoggerMiddleware';
 import Logger from '../../../../Shared/Logger/Logger';
 
@@ -29,15 +30,14 @@ class AppKoa implements IApp
 {
     public port?: number;
     private readonly app: Koa;
-    private locales: Locales;
     private config: IAppConfig;
+    private server: Server;
 
     constructor(config: IAppConfig)
     {
         this.port = config.serverPort || 8090;
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         this.app = require('koa-qs')(new Koa());
-        this.locales = Locales.getInstance();
         this.config = config;
     }
 
@@ -59,11 +59,10 @@ class AppKoa implements IApp
             jsonLimit: '5mb'
         }));
 
-<% if (orm == 'MikroORM') { %>
         if (MainConfig.getInstance().getConfig().dbConfig.default === 'MikroORM')
         {
             this.app.use((ctx, next) => RequestContext.createAsync(orm.em, next));
-        }<% } %>
+        }
 
         this.app.use(LoggerMiddleware);
         this.app.use(Throttle);
@@ -79,6 +78,9 @@ class AppKoa implements IApp
 
         this.app.use(WhiteListHandler.routes());
         this.app.use(WhiteListHandler.allowedMethods());
+
+        this.app.use(ItemHandler.routes());
+        this.app.use(ItemHandler.allowedMethods());
 
         this.app.use(RoleHandler.routes());
         this.app.use(RoleHandler.allowedMethods());
@@ -100,15 +102,25 @@ class AppKoa implements IApp
 
     public listen(): any
     {
-        return this.app.listen(this.port, () =>
+        this.server = this.app.listen(this.port, () =>
         {
             Logger.info(`Koa is listening to http://localhost:${this.port}`);
         });
+
+        return this.server;
     }
 
     public callback(): any
     {
         return this.app.callback();
+    }
+
+    close(): void
+    {
+        if (this.server)
+        {
+            this.server.close();
+        }
     }
 }
 

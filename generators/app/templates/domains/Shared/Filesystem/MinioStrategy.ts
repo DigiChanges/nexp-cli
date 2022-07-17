@@ -1,7 +1,7 @@
 import { Client } from 'minio';
 import internal from 'stream';
 import { MinioConfig } from '../../Config/mainConfig';
-import IFilesystem from './IFilesystem';
+import IFilesystem from '../InterfaceAdapters/IFilesystem';
 import IFileDomain from '../../File/Domain/Entities/IFileDomain';
 import ListObjectsPayload from '../../File/Domain/Payloads/ListObjectsPayload';
 

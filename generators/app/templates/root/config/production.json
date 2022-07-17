@@ -1,11 +1,11 @@
 {
   "env": "production",
-  "nodePath": "/home/node/app",
+  "nodePath": "/usr/app",
   "serverPort": 80,
   "setCookieSecure": true,
   "setCookieSameSite": "none",
-    "auth": {
-      "authorization": true
+  "auth": {
+    "authorization": true
   },
   "dbConfig": {
     "TypeORM": {

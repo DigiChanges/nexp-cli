@@ -1,8 +1,8 @@
+import MainConfig from '../../Config/mainConfig';
+import TypeORMCreateConnection from '../Database/TypeORMCreateConnection';
+import MongooseCreateConnection from '../Database/MongooseCreateConnection';
 import { ICreateConnection } from '@digichanges/shared-experience';
-import MainConfig from '../../Config/mainConfig';<% if (orm == 'TypeORM') { %>
-import TypeORMCreateConnection from '../Database/TypeORMCreateConnection';<% } %><% if (orm == 'Mongoose') { %>
-import MongooseCreateConnection from '../Database/MongooseCreateConnection';<% } %><% if (orm == 'MikroORM') { %>
-import MikroORMCreateConnection from '../Database/MikroORMCreateConnection';<% } %>
+import MikroORMCreateConnection from '../Database/MikroORMCreateConnection';
 
 class DatabaseFactory
 {
@@ -26,7 +26,9 @@ class DatabaseFactory
         const config = dbConfig[this.dbDefault];
 
         const createConnections: Record<string, any> = {
-            <%= orm %>: <%= orm %>CreateConnection
+            TypeORM: TypeORMCreateConnection,
+            Mongoose: MongooseCreateConnection,
+            MikroORM: MikroORMCreateConnection
         };
 
         return new createConnections[this.dbDefault](config);

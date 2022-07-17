@@ -1,3 +1,6 @@
+PROD_STAGE := prod
+DEV_STAGE := dev
+
 up:
 	@echo '************                               ************'
 	@echo '************           UP CONTAINERS       ************'
@@ -20,19 +23,13 @@ dev:
 	@echo '************                               ************'
 	@echo '************           DEV INIT    	      ************'
 	@echo '************                               ************'
-	docker-compose up --build -d
-
-debug:
-	@echo '************                               ************'
-	@echo '************           DEV DEBUG INIT 	  ************'
-	@echo '************                               ************'
-	docker-compose -f docker-compose.yml -f docker-compose.debug.yml up --build -d
+	STAGE=$(DEV_STAGE) docker-compose up --build -d
 
 prod:
 	@echo '************                               ************'
 	@echo '************           PROD INIT    	      ************'
 	@echo '************                               ************'
-	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+	STAGE=$(PROD_STAGE) docker-compose up --build -d
 
 dev_sql:
 	@echo '************                               ************'

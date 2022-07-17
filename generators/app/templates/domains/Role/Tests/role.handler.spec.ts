@@ -151,8 +151,6 @@ describe('Start Role Test', () =>
                 .set('Authorization', `Bearer ${token}`)
                 .send(payload);
 
-            const { body: { data } } = response;
-
             expect(response.statusCode).toStrictEqual(201);
         });
 

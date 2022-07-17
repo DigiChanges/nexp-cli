@@ -1,6 +1,7 @@
 import { MikroORM } from '@mikro-orm/core';
 import Role from '../../../Role/Infrastructure/Schemas/RoleMikroORM';
 import User from '../../../User/Infrastructure/Schemas/UserMikroORM';
+import Item from '../../../Item/Infrastructure/Schemas/ItemMikroORM';
 import File from '../../../File/Infrastructure/Schemas/FileMikroORM';
 import MainConfig from '../../../Config/mainConfig';
 
@@ -9,7 +10,7 @@ void (async() =>
     const config = MainConfig.getInstance().getConfig().dbConfig.MikroORM;
 
     const orm = await MikroORM.init({
-        entities: [Role, User, File],
+        entities: [Role, User, Item, File],
         dbName: config.dbName,
         type: config.type,
         host: config.host,

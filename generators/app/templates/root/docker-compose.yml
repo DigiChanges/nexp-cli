@@ -6,10 +6,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
-    working_dir: /home/node/app
+      target: ${STAGE}
+    working_dir: /usr/app
     volumes:
-     - .:/home/node/app:cached
+     - .:/usr/app:cached
     ports:
       - "8089:8089"
     networks:

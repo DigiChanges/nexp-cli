@@ -16,7 +16,7 @@ class Permissions
     static readonly USERS_DELETE: string = 'usersDelete';
     static readonly USERS_ASSIGN_ROLE: string = 'usersAssignRole';
     static readonly USERS_CHANGE_MY_PASSWORD: string = 'usersChangeMyPassword';
-    static readonly USERS_CHANGE_USER_PASSWORD: string = 'usersChangeUserPassword';<% if (fileDomain) { %>
+    static readonly USERS_CHANGE_USER_PASSWORD: string = 'usersChangeUserPassword';
 
     // FILES
     static readonly FILES_UPLOAD: string = 'filesUpload';
@@ -24,7 +24,7 @@ class Permissions
     static readonly FILES_DOWNLOAD: string = 'filesDownload';
     static readonly FILES_DELETE: string = 'filesDelete';
     static readonly FILES_LIST: string = 'filesList';
-    static readonly FILES_SHOW_METADATA: string = 'filesShowMetadata';<% } %>
+    static readonly FILES_SHOW_METADATA: string = 'filesShowMetadata';
 
     // ROLES
     static readonly ROLES_SAVE: string = 'rolesSave';
@@ -55,7 +55,7 @@ class Permissions
                     Permissions.USERS_CHANGE_MY_PASSWORD,
                     Permissions.USERS_CHANGE_USER_PASSWORD
                 ]
-            },<% if (fileDomain) { %>
+            },
             {
                 group: 'FILES',
                 permissions: [
@@ -66,7 +66,7 @@ class Permissions
                     Permissions.FILES_LIST,
                     Permissions.FILES_SHOW_METADATA
                 ]
-            },<% } %>
+            },
             {
                 group: 'ROLES',
                 permissions: [

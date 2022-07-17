@@ -50,4 +50,3 @@ export function validateEnv()
         EXECUTE_CRONS: bool()
     });
 }
-

@@ -6,7 +6,7 @@ class ForgotPasswordEvent
 {
     public static FORGOT_PASSWORD_EVENT = 'FORGOT_PASSWORD_EVENT';
 
-    public static forgotPasswordListener = async(props: any) =>
+    public static handle = async(props: any) =>
     {
         const { emailNotification, args } = props;
 
@@ -18,7 +18,7 @@ class ForgotPasswordEvent
         emailNotificator.data = args;
 
         await emailNotificator.send();
-    }
+    };
 }
 
 export default ForgotPasswordEvent;
