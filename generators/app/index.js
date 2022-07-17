@@ -1,6 +1,8 @@
 "use strict";
 const _ = require("lodash");
 const Generator = require("yeoman-generator");
+var yeoman = require('yeoman-environment');
+var env = yeoman.createEnv();
 _.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
 const chalk = require("chalk");
 const yosay = require("yosay");
@@ -18,7 +20,7 @@ const shared = require("./src/domains/shared");
 const user = require("./src/domains/user");
 const fs = require("fs");
 
-module.exports = class extends Generator {
+const GeneratorNexp = class extends Generator {
   async prompting() {
     this.log(yosay(`Welcome to the ${chalk.red("nexp-cli")} generator!`));
 
@@ -82,3 +84,7 @@ module.exports = class extends Generator {
     }
   }
 };
+
+module.exports = GeneratorNexp;
+
+env.registerStub(GeneratorNexp, 'npm:app');
