@@ -2,6 +2,7 @@ node_modules
 coverage
 *.lcov
 .idea
+.nexp
 
 # nyc test coverage
 .nyc_output
