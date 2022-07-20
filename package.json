@@ -43,7 +43,8 @@
     "lint-staged": "^9.4.3"
   },
   "engines": {
-    "npm": ">= 4.0.0"
+    "yarn": ">= 1.0.0",
+    "node" : ">=16.*"
   },
   "dependencies": {
     "boxen": "^7.0.0",
