@@ -13,7 +13,8 @@
   },
   "scripts": {
     "pretest": "eslint -c .eslintrc.cjs ./",
-    "test": "jest"
+    "test": "jest",
+    "update-submodules": "git submodule update --recursive --remote"
   },
   "publishConfig": {
     "access": "public"
@@ -44,17 +45,20 @@
   },
   "engines": {
     "yarn": ">= 1.0.0",
-    "node" : ">=16.*"
+    "node": ">=16.*"
   },
   "dependencies": {
     "boxen": "^7.0.0",
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
     "handlebars": "^4.7.7",
     "handlebars-copy": "^1.14.0",
     "inquirer": "^9.0.1",
     "listr2": "^4.0.5",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "replace-in-file": "^6.3.5"
   },
   "type": "module",
   "jest": {

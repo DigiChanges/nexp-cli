@@ -15,9 +15,9 @@ program
 
 program.command('create')
   .description('Create new NExp project.')
-  .action(() =>
+  .action(async() =>
   {
-    createProject();
+    await createProject();
   });
 
 program.parse(process.argv);

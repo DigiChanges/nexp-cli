@@ -1,56 +1,64 @@
 import 'reflect-metadata';
+import './inversify.config';
+import container from './register';
 
 import supertest from 'supertest';
 
-import { ICreateConnection, ITokenRepository } from '@digichanges/shared-experience';
-
-
 import DatabaseFactory from './Shared/Factories/DatabaseFactory';
-import EventHandler from './Shared/Events/EventHandler';
-import { REPOSITORIES } from './Config/Injects/repositories';{{#ifEquals orm 'Mongoose' }}
-import TokenMongoRepository from './Auth/Infrastructure/Repositories/TokenMongoRepository';{{/ifEquals}} {{#ifEquals orm 'TypeORM' }}
-import TokenSqlRepository from './Auth/Infrastructure/Repositories/TokenSqlRepository';{{/ifEquals}} {{#ifEquals orm 'MikroORM' }}
-import TokenMikroSqlRepository from './Auth/Infrastructure/Repositories/TokenMikroSqlRepository';{{/ifEquals}}
+import EventHandler from './Shared/Infrastructure/Events/EventHandler';
+import { FACTORIES, REPOSITORIES } from './Config/Injects';
+{{#ifEquals orm "Mongoose" }}
+import TokenMongooseRepository from './Auth/Infrastructure/Repositories/TokenMongooseRepository'; {{/ifEquals}} {{#ifEquals orm "TypeORM" }}
+import TokenTypeORMRepository from './Auth/Infrastructure/Repositories/TokenTypeORMRepository'; {{/ifEquals}} {{#ifEquals orm "MikroORM" }}
+import TokenMikroORMRepository from './Auth/Infrastructure/Repositories/TokenMikroORMRepository'; {{/ifEquals}}
+
 import { validateEnv } from './Config/validateEnv';
-import container from './inversify.config';
 import ITokenDomain from './Auth/Domain/Entities/ITokenDomain';
 import SeedFactory from './Shared/Factories/SeedFactory';
-import AppFactory from './App/Presentation/Factories/AppFactory';
-import Locales from './App/Presentation/Shared/Locales';
-import { FACTORIES } from './Config/Injects/factories';
-import INotificationFactory from './Notification/Shared/INotificationFactory';
-import MockNotificationFactory from './Notification/Tests/MockNotificationFactory';
+import Locales from './Shared/Presentation/Shared/Locales';
+import MainConfig from './Config/MainConfig';
+import IApp from './Shared/Application/Http/IApp';
+import { Lifecycle } from 'tsyringe';
+import MockStrategy from './Notification/Tests/MockStrategy';
+import INotifierStrategy from './Notification/Shared/INotifierStrategy';
+import AppFactory from './Shared/Factories/AppFactory';
+import ICreateConnection from './Shared/Infrastructure/Database/ICreateConnection';
+import ITokenRepository from './Auth/Infrastructure/Repositories/ITokenRepository';
+import { urlAlphabet } from 'nanoid';
+import { customAlphabet } from 'nanoid/async';
 
 const initTestServer = async(): Promise<any> =>
 {
     validateEnv();
 
+    const config = MainConfig.getInstance().getConfig();
+
     const databaseFactory: DatabaseFactory = new DatabaseFactory();
     const dbConnection: ICreateConnection = databaseFactory.create();
 
-    dbConnection.initConfigTest(process.env.MONGO_URL);
+    const nanoId = customAlphabet(urlAlphabet, 5);
+    const dbName = await nanoId();
+    const newMongoUri = `${process.env.MONGO_URL}${dbName}`;
+
+    dbConnection.initConfigTest(newMongoUri);
     await dbConnection.create();
 
     const eventHandler = EventHandler.getInstance();
     await eventHandler.setListeners();
 
     void Locales.getInstance();
+    {{#ifEquals orm "Mongoose" }}
+    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenMongooseRepository }, { lifecycle: Lifecycle.Singleton });{{/ifEquals}} {{#ifEquals orm "TypeORM" }}
+    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenTypeORMRepository }, { lifecycle: Lifecycle.Singleton });{{/ifEquals}} {{#ifEquals orm "MikroORM" }}
+    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenMikroORMRepository }, { lifecycle: Lifecycle.Singleton });{{/ifEquals}}
+    container.register<INotifierStrategy>(FACTORIES.EmailStrategy, { useClass: MockStrategy }, { lifecycle: Lifecycle.Singleton });
 
-    container.unbind(REPOSITORIES.ITokenRepository);{{#ifEquals orm 'Mongoose' }}
-    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenMongoRepository);{{/ifEquals}} {{#ifEquals orm 'TypeORM' }}
-    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenSqlRepository);{{/ifEquals}} {{#ifEquals orm 'MikroORM' }}
-    container.bind<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository).to(TokenMikroSqlRepository);{{/ifEquals}}
+    const app: IApp = AppFactory.create(config.app.default);
 
-    container.unbind(FACTORIES.INotificationFactory);
-    container.bind<INotificationFactory>(FACTORIES.INotificationFactory).to(MockNotificationFactory);
-
-    const app = AppFactory.create('App{{http}}',
-        viewRouteEngine: `${process.cwd()}/dist/src/App/Presentation/Views`,
+    app.initConfig({
         serverPort: 8088
     });
-
-    app.initConfig();
-    app.build();
+    await app.build();
 
     const application = app.callback();
     const request: supertest.SuperAgentTest = supertest.agent(application);
@@ -62,4 +70,3 @@ const initTestServer = async(): Promise<any> =>
 };
 
 export default initTestServer;
-
