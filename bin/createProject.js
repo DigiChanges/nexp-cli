@@ -1,14 +1,15 @@
 import inquirer from 'inquirer';
 import { Listr } from 'listr2';
 
-import welcomeBox from '../lib/boxen.js';
-import copyIndexFiles from '../lib/copyIndexFiles.js';
-import createFolders from '../lib/createFolders.js';
-import copyRootFiles from '../lib/copyRootFiles.js';
-import cleanDomains from '../lib/cleanDomains/cleanDomains.js';
-import copyDomainFiles from '../lib/copyDomainFiles.js';
-import getChoices from '../lib/getChoices.js';
-import createPackageJson from '../lib/package.js';
+import welcomeBox from './welcome.js';
+import copyIndexFiles from '../lib/createProject/copyIndexFiles.js';
+import createFolders from '../lib/createProject/createFolders.js';
+import copyRootFiles from '../lib/createProject/copyRootFiles.js';
+import cleanDomains from '../lib/createProject/cleanDomains/cleanDomains.js';
+import copyDomainFiles from '../lib/createProject/copyDomainFiles.js';
+import getChoices from '../lib/createProject/getChoices.js';
+import createPackageJson from '../lib/createProject/package.js';
+import setEvnVar from "../lib/createProject/setEnvVar.js";
 
 const createProject = async() =>
 {
@@ -64,6 +65,13 @@ const createProject = async() =>
                   task: async() =>
                   {
                       await copyRootFiles(answers);
+                  }
+              },
+              {
+                  title: 'Set .env file',
+                  task: async() =>
+                  {
+                      await setEvnVar(answers);
                   }
               },
               {
