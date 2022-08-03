@@ -1,4 +1,4 @@
-# nexp-cli [![NPM version][npm-image]][npm-url]
+# Nexp-cli [![NPM version][npm-image]][npm-url]
 
 > This CLI is made to be able to quickly create the NExp boilerplate with all the content you want it to have.
 > 
@@ -8,17 +8,16 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and nexp-cli using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install nexp-cli using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
-npm install -g yo
-npm install -g generator-nexp-cli
+npm install -g nexp-cli
 ```
 
 Then generate your new project:
 
 ```bash
-yo generator-nexp-cli
+nexp-cli create
 ```
 
 ## Step by Step
