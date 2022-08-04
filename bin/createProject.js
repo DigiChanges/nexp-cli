@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 import { Listr } from 'listr2';
+import * as url from 'url';
 
 import welcomeBox from './welcome.js';
 import copyIndexFiles from '../lib/createProject/copyIndexFiles.js';
@@ -15,7 +16,7 @@ const createProject = async() =>
 {
     console.log(welcomeBox);
 
-		const rootPath = process.cwd();
+	  const rootPath = url.fileURLToPath(new URL('.', import.meta.url)).replace('/bin', '');
 
     const { orms, https } = await getChoices(rootPath);
 
@@ -49,7 +50,7 @@ const createProject = async() =>
           console.log(answers);
           const tasks = new Listr([
               {
-                  title: 'Create Directories',
+                  title: 'Initialization',
                   task: async() =>
                   {
                       await createFolders(answers, rootPath);
