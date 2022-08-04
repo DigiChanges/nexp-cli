@@ -74,7 +74,7 @@ const createProject = async() =>
                   title: 'Set .env file',
                   task: async() =>
                   {
-                      await setEvnVar(answers, rootPath);
+                      await setEvnVar(answers);
                   }
               },
               {
