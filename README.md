@@ -21,12 +21,47 @@ nexp-cli create
 ```
 
 ## Step by Step
-![1.png](images/1.png)
+#### First of all install nexp cli package globally.
+
+![1.png](images/1.png) 
+
+#### Currently there is a `create` command call, in the future more commands will be added.
+
 ![2.png](images/2.png)
+
+#### Write the name of the project.
+
 ![3.png](images/3.png)
+
+#### Choose the ORM.
+
 ![4.png](images/4.png)
+
+#### Choose the HTTP library.
+
 ![5.png](images/5.png)
+
+#### And wait for each action to complete.
+
 ![6.png](images/6.png)
+
+#### Copy .env.dev to .env and install dependencies with yarn or npm.
+
+![7.png](images/7.png)
+
+#### Execute `make dev command` or `STAGE=dev docker-compose up --build -d` to create docker containers.
+
+* Node
+* DB
+* Redis
+* Mail
+* Minio
+
+![8.png](images/8.png)
+
+#### And it's ready to code.
+
+![9.png](images/9.png)
 
 ## Next
 * Choose more HTTP libs
