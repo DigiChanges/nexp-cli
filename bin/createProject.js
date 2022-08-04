@@ -9,13 +9,15 @@ import cleanDomains from '../lib/createProject/cleanDomains/cleanDomains.js';
 import copyDomainFiles from '../lib/createProject/copyDomainFiles.js';
 import getChoices from '../lib/createProject/getChoices.js';
 import createPackageJson from '../lib/createProject/package.js';
-import setEvnVar from "../lib/createProject/setEnvVar.js";
+import setEvnVar from '../lib/createProject/setEnvVar.js';
 
 const createProject = async() =>
 {
     console.log(welcomeBox);
 
-    const { orms, https } = await getChoices();
+		const rootPath = process.cwd();
+
+    const { orms, https } = await getChoices(rootPath);
 
     inquirer
       .prompt([
@@ -50,49 +52,49 @@ const createProject = async() =>
                   title: 'Create Directories',
                   task: async() =>
                   {
-                      await createFolders(answers);
+                      await createFolders(answers, rootPath);
                   }
               },
               {
                   title: 'Copy Index Files',
                   task: async() =>
                   {
-                      await copyIndexFiles(answers);
+                      await copyIndexFiles(answers, rootPath);
                   }
               },
               {
                   title: 'Copy Root Files',
                   task: async() =>
                   {
-                      await copyRootFiles(answers);
+                      await copyRootFiles(answers, rootPath);
                   }
               },
               {
                   title: 'Set .env file',
                   task: async() =>
                   {
-                      await setEvnVar(answers);
+                      await setEvnVar(answers, rootPath);
                   }
               },
               {
                   title: 'Copy Domain Files',
                   task: async() =>
                   {
-                      await copyDomainFiles(answers);
+                      await copyDomainFiles(answers, rootPath);
                   }
               },
               {
                   title: 'Clean Domain Files',
                   task: async() =>
                   {
-                      await cleanDomains(answers);
+                      await cleanDomains(answers, rootPath);
                   }
               },
               {
                   title: 'Create Package JSON',
                   task: async() =>
                   {
-                      await createPackageJson(answers);
+                      await createPackageJson(answers, rootPath);
                   }
               }
           ]);

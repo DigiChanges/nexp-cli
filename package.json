@@ -14,7 +14,8 @@
   "scripts": {
     "pretest": "eslint -c .eslintrc.cjs ./",
     "test": "jest",
-    "update-submodules": "git submodule update --recursive --remote"
+    "update": "git submodule update --recursive --remote",
+    "clone": "git submodule update --init --recursive"
   },
   "publishConfig": {
     "access": "public"
