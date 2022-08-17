@@ -14,6 +14,7 @@
   "scripts": {
     "pretest": "eslint -c .eslintrc.cjs ./",
     "test": "jest",
+    "merge": "git submodule update --remote --merge",
     "update": "git submodule update --recursive --remote",
     "clone": "git submodule update --init --recursive"
   },
