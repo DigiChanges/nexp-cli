@@ -35,18 +35,8 @@
     "mikro-orm",
     "type-orm"
   ],
-  "devDependencies": {
-    "eslint": "^8.7.0",
-    "eslint-config-xo": "^0.27.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "husky": "^6.0.0",
-    "jest": "^26.1.0",
-    "lint-staged": "^9.4.3"
-  },
   "engines": {
-    "yarn": ">= 1.0.0",
+    "pnpm": ">=7.0.0",
     "node": ">=16.*"
   },
   "dependencies": {
@@ -61,6 +51,17 @@
     "listr2": "^4.0.5",
     "lodash": "^4.17.21",
     "replace-in-file": "^6.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-xo": "^0.27.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^6.0.0",
+    "jest": "^26.1.0",
+    "lint-staged": "^9.4.3",
+		"prettier": "^1.13.0"
   },
   "type": "module",
   "jest": {
