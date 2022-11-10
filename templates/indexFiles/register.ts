@@ -6,10 +6,6 @@ import { FACTORIES, SERVICES, REPOSITORIES } from './Config/Injects';
 import BcryptEncryptionStrategy from './Shared/Infrastructure/Encryption/BcryptEncryptionStrategy';
 import Md5EncryptionStrategy from './Shared/Infrastructure/Encryption/Md5EncryptionStrategy';
 
-import INotifierStrategy from './Notification/Shared/INotifierStrategy';
-import EmailStrategy from './Notification/Shared/EmailStrategy';
-import WebPushStrategy from './Notification/Shared/WebPushStrategy';
-
 import AuthService from './Auth/Domain/Services/AuthService';
 import UserService from './User/Domain/Services/UserService';
 
@@ -67,8 +63,5 @@ container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository
 // Shared
 container.register<IEncryption>(FACTORIES.BcryptEncryptionStrategy, { useClass: BcryptEncryptionStrategy }, { lifecycle: Lifecycle.Singleton });
 container.register<IEncryption>(FACTORIES.Md5EncryptionStrategy, { useClass: Md5EncryptionStrategy }, { lifecycle: Lifecycle.Singleton });
-
-container.register<INotifierStrategy>(FACTORIES.EmailStrategy, { useClass: EmailStrategy }, { lifecycle: Lifecycle.Singleton });
-container.register<INotifierStrategy>(FACTORIES.WebPushStrategy, { useClass: WebPushStrategy }, { lifecycle: Lifecycle.Singleton });
 
 export default container;
