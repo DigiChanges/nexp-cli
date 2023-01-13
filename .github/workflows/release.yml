@@ -14,12 +14,39 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
+  build:
+    name: Submodule update
+    runs-on: ubuntu-latest
+    env:
+      PARENT_REPOSITORY: 'DigiChanges/node-experience'
+      CHECKOUT_BRANCH: 'master'
+      PR_AGAINST_BRANCH: 'master'
+      OWNER: 'DigiChanges'
+
+    steps:
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      ####################################
+      # Run the action against code base #
+      ####################################
+      - name: run action
+        id: run_action
+        uses: releasehub-com/github-action-create-pr-parent-submodule@v1
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          parent_repository: ${{ env.PARENT_REPOSITORY }}
+          checkout_branch: ${{ env.CHECKOUT_BRANCH}}
+          pr_against_branch: ${{ env.PR_AGAINST_BRANCH }}
+          owner: ${{ env.OWNER }}
   release:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     steps:
 
@@ -35,10 +62,3 @@ jobs:
           disable-changelog: true
           node-module: true
 
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10
-      - run: npm install
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ env.NPM_TOKEN }}

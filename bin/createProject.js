@@ -16,7 +16,7 @@ const createProject = async() =>
 {
     console.log(welcomeBox);
 
-	  const rootPath = url.fileURLToPath(new URL('.', import.meta.url)).replace('/bin', '');
+	  const rootPath = url.fileURLToPath(new URL('.', import.meta.url)).toString().replace('/bin', '');
 
     const { orms, https } = await getChoices(rootPath);
 

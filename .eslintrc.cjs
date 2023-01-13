@@ -82,4 +82,3 @@ module.exports = {
         'no-mixed-spaces-and-tabs': 0
     }
 };
-
