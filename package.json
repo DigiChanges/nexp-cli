@@ -40,7 +40,7 @@
     "node": ">=16.*"
   },
   "dependencies": {
-    "boxen": "^7.0.0",
+    "boxen": "^7.0.1",
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
     "fs-extra": "^10.1.0",
@@ -50,7 +50,8 @@
     "inquirer": "^9.0.1",
     "listr2": "^4.0.5",
     "lodash": "^4.17.21",
-    "replace-in-file": "^6.3.5"
+    "replace-in-file": "^6.3.5",
+    "walkdir": "^0.4.1"
   },
   "devDependencies": {
     "eslint": "^8.7.0",
