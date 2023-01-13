@@ -1,6 +1,6 @@
 {
   "name": "nexp-cli",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "NExp CLI",
   "homepage": "https://digichanges.github.io/node-experience/#/",
   "bin": {
