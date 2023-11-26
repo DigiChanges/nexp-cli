@@ -13,10 +13,7 @@
   },
   "scripts": {
     "pretest": "eslint -c .eslintrc.cjs ./",
-    "test": "jest",
-    "git-merge": "git submodule update --remote --merge",
-    "git-update": "git submodule update --recursive --remote",
-    "git-clone": "git submodule update --init --recursive"
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public"
@@ -29,28 +26,26 @@
     "boilerplate",
     "scaffolding",
     "typescript",
-    "koa",
-    "express",
+    "fastify",
     "mongoose",
-    "mikro-orm",
-    "type-orm"
+    "mikro-orm"
   ],
   "engines": {
-    "pnpm": ">=7.0.0",
-    "node": ">=16.*"
+    "node": ">=18.*"
   },
   "dependencies": {
-    "boxen": "^7.0.1",
-    "chalk": "^5.2.0",
+    "boxen": "^7.1.1",
+    "chalk": "^5.3.0",
     "commander": "^9.5.0",
     "fs-extra": "^10.1.0",
     "glob": "^8.1.0",
-    "handlebars": "^4.7.7",
-    "handlebars-copy": "^1.17.0",
-    "inquirer": "^9.1.4",
+    "handlebars": "^4.7.8",
+    "handlebars-copy": "^1.18.0",
+    "inquirer": "^9.2.12",
     "listr2": "^4.0.5",
     "lodash": "^4.17.21",
     "replace-in-file": "^6.3.5",
+    "simple-git": "^3.21.0",
     "walkdir": "^0.4.1"
   },
   "devDependencies": {

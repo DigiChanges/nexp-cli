@@ -1,6 +1,5 @@
 import inquirer from 'inquirer';
 import { Listr } from 'listr2';
-import * as url from 'url';
 
 import welcomeBox from './welcome.js';
 import copyIndexFiles from '../lib/createProject/copyIndexFiles.js';
@@ -8,17 +7,14 @@ import createFolders from '../lib/createProject/createFolders.js';
 import copyRootFiles from '../lib/createProject/copyRootFiles.js';
 import cleanDomains from '../lib/createProject/cleanDomains/cleanDomains.js';
 import copyDomainFiles from '../lib/createProject/copyDomainFiles.js';
-import getChoices from '../lib/createProject/getChoices.js';
 import createPackageJson from '../lib/createProject/package.js';
 import setEvnVar from '../lib/createProject/setEnvVar.js';
+import simpleGit from 'simple-git';
+import fs from 'fs-extra';
 
 const createProject = async() =>
 {
     console.log(welcomeBox);
-
-	  const rootPath = url.fileURLToPath(new URL('.', import.meta.url)).toString().replace('/bin', '');
-
-    const { orms, https } = await getChoices(rootPath);
 
     inquirer
       .prompt([
@@ -32,15 +28,8 @@ const createProject = async() =>
           type: 'list',
           name: 'orm',
           message: 'Choose an ORM.',
-          choices: orms,
+          choices: ['Mongoose', 'MikroORM'],
           default: 'Mongoose'
-        },
-        {
-          type: 'list',
-          name: 'http',
-          message: 'Choose an HTTP Library.',
-          choices: https,
-          default: 'Koa'
         }
       ])
       .then((answers) =>
@@ -49,25 +38,45 @@ const createProject = async() =>
 
           console.log(answers);
           const tasks = new Listr([
-              {
+               {
+                  title: 'Clone Node Experience',
+                  task: async() =>
+                  {
+											const success = await fs.pathExists('node-experience');
+
+											if (!success)
+											{
+													const options = {
+														 baseDir: process.cwd(),
+														 binary: 'git',
+														 maxConcurrentProcesses: 6,
+														 trimmed: false
+													};
+
+													const git = simpleGit(options);
+													await git.clone('git@github.com:DigiChanges/node-experience.git');
+											}
+                  }
+              },
+							{
                   title: 'Initialization',
                   task: async() =>
                   {
-                      await createFolders(answers, rootPath);
+                      await createFolders(answers, './');
                   }
               },
               {
                   title: 'Copy Index Files',
                   task: async() =>
                   {
-                      await copyIndexFiles(answers, rootPath);
+                      await copyIndexFiles(answers, './');
                   }
               },
               {
                   title: 'Copy Root Files',
                   task: async() =>
                   {
-                      await copyRootFiles(answers, rootPath);
+                      await copyRootFiles(answers, './');
                   }
               },
               {
@@ -81,21 +90,21 @@ const createProject = async() =>
                   title: 'Copy Domain Files',
                   task: async() =>
                   {
-                      await copyDomainFiles(answers, rootPath);
+                      await copyDomainFiles(answers, './');
                   }
               },
               {
                   title: 'Clean Domain Files',
                   task: async() =>
                   {
-                      await cleanDomains(answers, rootPath);
+                      await cleanDomains(answers, './');
                   }
               },
               {
                   title: 'Create Package JSON',
                   task: async() =>
                   {
-                      await createPackageJson(answers, rootPath);
+                      await createPackageJson(answers, './');
                   }
               }
           ]);

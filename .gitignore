@@ -3,6 +3,7 @@ coverage
 *.lcov
 .idea
 .nexp
+node-experience
 
 # nyc test coverage
 .nyc_output
