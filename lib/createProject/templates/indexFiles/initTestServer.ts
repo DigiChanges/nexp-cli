@@ -8,9 +8,11 @@ import DatabaseFactory from './Shared/Factories/DatabaseFactory';
 import EventHandler from './Shared/Infrastructure/Events/EventHandler';
 import { REPOSITORIES } from './Config/Injects';
 {{#ifEquals orm "Mongoose" }}
-import TokenMongooseRepository from './Auth/Infrastructure/Repositories/TokenMongooseRepository'; {{/ifEquals}} {{#ifEquals orm "TypeORM" }}
-import TokenTypeORMRepository from './Auth/Infrastructure/Repositories/TokenTypeORMRepository'; {{/ifEquals}} {{#ifEquals orm "MikroORM" }}
-import TokenMikroORMRepository from './Auth/Infrastructure/Repositories/TokenMikroORMRepository'; {{/ifEquals}}
+import TokenMongooseRepository from './Auth/Infrastructure/Repositories/TokenMongooseRepository';
+{{/ifEquals}}
+{{#ifEquals orm "MikroORM" }}
+import TokenMikroORMRepository from './Auth/Infrastructure/Repositories/TokenMikroORMRepository';
+{{/ifEquals}}
 
 import { validateEnv } from './Config/validateEnv';
 import ITokenDomain from './Auth/Domain/Entities/ITokenDomain';
@@ -45,9 +47,11 @@ const initTestServer = async(): Promise<any> =>
     container._registry._registryMap.delete('ITokenRepository');
 
     {{#ifEquals orm "Mongoose" }}
-    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenMongooseRepository }, { lifecycle: Lifecycle.Singleton });{{/ifEquals}} {{#ifEquals orm "TypeORM" }}
-    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenTypeORMRepository }, { lifecycle: Lifecycle.Singleton });{{/ifEquals}} {{#ifEquals orm "MikroORM" }}
-    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenMikroORMRepository }, { lifecycle: Lifecycle.Singleton });{{/ifEquals}}
+    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenMongooseRepository }, { lifecycle: Lifecycle.Singleton });
+    {{/ifEquals}}
+    {{#ifEquals orm "MikroORM" }}
+    container.register<ITokenRepository<ITokenDomain>>(REPOSITORIES.ITokenRepository, { useClass: TokenMikroORMRepository }, { lifecycle: Lifecycle.Singleton });
+    {{/ifEquals}}
 
     const app: IApp = AppFactory.create(config.app.default);
 

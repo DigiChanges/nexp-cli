@@ -1,0 +1,100 @@
+version: '3.6'
+
+services:
+  node:
+    container_name: {{projectName}}_node_1
+    restart: always
+    tty: false
+    stdin_open: false
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${STAGE}
+    ports:
+      - "8089:8089"
+      - "9229:9229"
+    labels:
+      - traefik.http.routers.api.rule=Host(`api.domain.com`)
+      - traefik.http.routers.api.tls=true
+      - traefik.http.routers.api.tls.certresolver=lets-encrypt
+      - traefik.port=80
+    volumes:
+      - ./dist:/home/node/dist
+      - ./src:/home/node/src
+      - ./config:/home/node/config
+      - ./.env:/home/node/.env
+    networks:
+     - {{projectName}}_net
+{{#ifEquals orm "Mongoose" }}
+  db:
+    container_name: {{projectName}}_db_1
+    restart: always
+    build:
+      context: docker/mongo/
+      dockerfile: Dockerfile
+    ports:
+      - "27017:27017"
+    networks:
+     - {{projectName}}_net
+    environment:
+      MONGODB_ROOT_PASSWORD: 123456
+      MONGODB_USERNAME: {{projectName}}
+      MONGODB_PASSWORD: {{projectName}}123
+      MONGODB_DATABASE: db_{{projectName}}
+    volumes:
+      - data:/bitnami/mongodb {{/ifEquals}} {{#ifEquals orm "MikroORM" }}
+
+  db:
+    container_name: {{projectName}}_db_1
+    restart: always
+    build:
+      context: docker/postgres/
+      dockerfile: Dockerfile
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER={{projectName}}
+      - POSTGRES_DB=db_{{projectName}}
+      - POSTGRES_PASSWORD={{projectName}}123
+    volumes:
+      - data_sql:/var/lib/postgresql/data
+    networks:
+      - {{projectName}}_net {{/ifEquals}}
+
+  mail:
+    container_name: {{projectName}}_mail_1
+    restart: always
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+    networks:
+     - {{projectName}}_net
+
+  cache:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly
+    restart: always
+    ulimits:
+      memlock: -1
+    container_name: experience_cache_1
+    environment:
+      - DRAGONFLY_USER=experience
+      - DRAGONFLY_PASSWORD=ewsua132435
+      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+    ports:
+      - "6379:6379"
+    networks:
+      - {{projectName}}_net
+    volumes:
+      - cache:/data
+
+networks:
+  {{projectName}}_net:
+    driver: "bridge"
+
+volumes:
+  data:
+    driver: "local"
+  data_sql:
+    driver: "local"
+  cache:
+    driver: "local"

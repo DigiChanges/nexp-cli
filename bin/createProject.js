@@ -100,6 +100,27 @@ const createProject = async() =>
                       await cleanDomains(answers, './');
                   }
               },
+							{
+									title: 'Copy Index Files',
+									task: async() =>
+									{
+											await copyIndexFiles(answers, './');
+									}
+							},
+							{
+									title: 'Copy Root Files',
+									task: async() =>
+									{
+											await copyRootFiles(answers, './');
+									}
+							},
+							{
+									title: 'Set .env file',
+									task: async() =>
+									{
+											await setEvnVar(answers);
+									}
+							},
               {
                   title: 'Create Package JSON',
                   task: async() =>
