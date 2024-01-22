@@ -66,27 +66,6 @@ const createProject = async() =>
                   }
               },
               {
-                  title: 'Copy Index Files',
-                  task: async() =>
-                  {
-                      await copyIndexFiles(answers, './');
-                  }
-              },
-              {
-                  title: 'Copy Root Files',
-                  task: async() =>
-                  {
-                      await copyRootFiles(answers, './');
-                  }
-              },
-              {
-                  title: 'Set .env file',
-                  task: async() =>
-                  {
-                      await setEvnVar(answers);
-                  }
-              },
-              {
                   title: 'Copy Domain Files',
                   task: async() =>
                   {
