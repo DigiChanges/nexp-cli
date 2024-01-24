@@ -73,9 +73,9 @@ const createProject = async() =>
               },
 						  {
 							  title: 'Copy templates',
-							  task: () =>
+							  task: async () =>
 							  {
-							  	copyTemplatesFiles(cli_templates_dir, tmpDir);
+							  	await copyTemplatesFiles(cli_templates_dir, `${tmpDir}/templates`);
 						  	}
 						  },
 							{
