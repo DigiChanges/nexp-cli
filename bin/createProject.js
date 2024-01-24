@@ -11,7 +11,9 @@ import createPackageJson from '../lib/createProject/package.js';
 import setEvnVar from '../lib/createProject/setEnvVar.js';
 import simpleGit from 'simple-git';
 import fs from 'fs-extra';
-import { join } from 'path';
+import { dirname, join, resolve } from 'path';
+import { fileURLToPath } from 'url';
+import copyTemplatesFiles from '../lib/createProject/copyTemplateFolder.js';
 
 const createProject = async() =>
 {
@@ -37,14 +39,22 @@ const createProject = async() =>
       {
           answers.projectName = answers.projectName.trim().replaceAll(' ', '_').replaceAll('-', '_');
 
-					const tmpDir = join(process.cwd(),'.tmp')
+					const tmpDirName = ".tmp"
+					const tmpDir = join(process.cwd(),tmpDirName)
+				  const cli_templates_dir = resolve(dirname(fileURLToPath(import.meta.url)), '../templates');
 
           console.log(answers);
           const tasks = new Listr([
-               {
+              {
                   title: 'Clone Node Experience',
                   task: async() =>
                   {
+											const exists = await fs.pathExists(tmpDir);
+											if(!exists)
+											{
+												await fs.mkdirs(tmpDirName)
+											}
+
 											const success = await fs.pathExists(tmpDir + '/node-experience');
 
 											if (!success)
@@ -61,6 +71,13 @@ const createProject = async() =>
 											}
                   }
               },
+						  {
+							  title: 'Copy templates',
+							  task: () =>
+							  {
+							  	copyTemplatesFiles(cli_templates_dir, tmpDir);
+						  	}
+						  },
 							{
                   title: 'Initialization',
                   task: async() =>
@@ -72,28 +89,28 @@ const createProject = async() =>
                   title: 'Copy Domain Files',
                   task: async() =>
                   {
-                      await copyDomainFiles(answers, './');
+                      await copyDomainFiles(answers, tmpDir);
                   }
               },
               {
                   title: 'Clean Domain Files',
                   task: async() =>
                   {
-                      await cleanDomains(answers, './');
+                      await cleanDomains(answers, tmpDir);
                   }
               },
 							{
 									title: 'Copy Index Files',
 									task: async() =>
 									{
-											await copyIndexFiles(answers, './');
+											await copyIndexFiles(answers, tmpDir);
 									}
 							},
 							{
 									title: 'Copy Root Files',
 									task: async() =>
 									{
-											await copyRootFiles(answers, './');
+											await copyRootFiles(answers, tmpDir);
 									}
 							},
 							{
@@ -107,9 +124,16 @@ const createProject = async() =>
                   title: 'Create Package JSON',
                   task: async() =>
                   {
-                      await createPackageJson(answers, './');
+                      await createPackageJson(answers, tmpDir);
                   }
-              }
+              },
+							{
+								title: 'Clean init setup',
+								task: async() =>
+								{
+									await fs.remove(tmpDir)
+								}
+							}
           ]);
 
           tasks.run().catch(err =>

@@ -58,10 +58,11 @@ container.register<IItemRepository>(REPOSITORIES.IItemRepository, { useFactory: 
 container.register<INotificationRepository<INotificationDomain>>(REPOSITORIES.INotificationRepository, { useClass: NotificationMongooseRepository }, { lifecycle: Lifecycle.Singleton });
 {{/ifEquals}}
 
-{{#ifEquals orm "Mongoose" }}
+{{#ifEquals orm "MikroORM" }}
 container.register<IItemRepository>(REPOSITORIES.IItemRepository, { useClass: ItemMikroORMRepository }, { lifecycle: Lifecycle.Singleton });
-container.register<IAuthRepository>(REPOSITORIES.IAuthRepository, { useClass: AuthSupabaseRepository }, { lifecycle: Lifecycle.Singleton });
 {{/ifEquals}}
+container.register<IAuthRepository>(REPOSITORIES.IAuthRepository, { useClass: AuthSupabaseRepository }, { lifecycle: Lifecycle.Singleton });
+
 // Shared
 container.register<IEncryption>(FACTORIES.Md5EncryptionStrategy, { useClass: Md5EncryptionStrategy }, { lifecycle: Lifecycle.Singleton });
 
