@@ -11,6 +11,7 @@ import createPackageJson from '../lib/createProject/package.js';
 import setEvnVar from '../lib/createProject/setEnvVar.js';
 import simpleGit from 'simple-git';
 import fs from 'fs-extra';
+import { join } from 'path';
 
 const createProject = async() =>
 {
@@ -36,18 +37,20 @@ const createProject = async() =>
       {
           answers.projectName = answers.projectName.trim().replaceAll(' ', '_').replaceAll('-', '_');
 
+					const tmpDir = join(process.cwd(),'.tmp')
+
           console.log(answers);
           const tasks = new Listr([
                {
                   title: 'Clone Node Experience',
                   task: async() =>
                   {
-											const success = await fs.pathExists('node-experience');
+											const success = await fs.pathExists(tmpDir + '/node-experience');
 
 											if (!success)
 											{
 													const options = {
-														 baseDir: process.cwd(),
+														 baseDir: tmpDir,
 														 binary: 'git',
 														 maxConcurrentProcesses: 6,
 														 trimmed: false

@@ -10,15 +10,14 @@ import IAuthRepository from '../../Auth/Domain/Repositories/IAuthRepository';
 import IItemRepository from '../../Item/Domain/Repositories/IItemRepository';
 import INotificationRepository from '../../Notification/Infrastructure/Repositories/INotificationRepository';
 import INotificationDomain from '../../Notification/Domain/Entities/INotificationDomain';
-
-{{#ifEquals orm "Mongoose"}}
-
+{{#ifEquals orm "Mongoose" }}
 import ItemMongooseRepository from '../../Item/Infrastructure/Repositories/ItemMongooseRepository';
-import NotificationMongooseRepository from '../../Notification/Infrastructure/Repositories/NotificationMongooseRepository'; {{/ifEquals}} {{#ifEquals orm "MikroORM"}}
+import NotificationMongooseRepository from '../../Notification/Infrastructure/Repositories/NotificationMongooseRepository';
+{{/ifEquals}}
 
-import ItemMikroORMRepository from '../../Item/Infrastructure/Repositories/ItemMikroORMRepository'; {{/ifEquals}}
-
-
+{{#ifEquals orm "MikroORM" }}
+import ItemMikroORMRepository from '../../Item/Infrastructure/Repositories/ItemMikroORMRepository';
+{{/ifEquals}}
 import AuthSupabaseRepository from '../../Auth/Infrastructure/Repositories/Auth/AuthSupabaseRepository';
 
 import AuthorizeSupabaseService from '../../Auth/Domain/Services/AuthorizeSupabaseService';
@@ -35,58 +34,54 @@ const cacheConfig = config.cache;
 
 // Data Access Objects
 container.register<ICacheDataAccess>(REPOSITORIES.ICacheDataAccess,
-    {
-        // @ts-ignore
-        useFactory: instanceCachingFactory(() => new RedisCacheDataAccess(cacheConfig.redis))
-    }, { lifecycle: Lifecycle.Transient }
+	{
+		// @ts-ignore
+		useFactory: instanceCachingFactory(() => new RedisCacheDataAccess(cacheConfig.redis))
+	}, { lifecycle: Lifecycle.Transient }
 );
-{{#ifEquals orm "Mongoose"}}
+
 // Repositories
-if (defaultDbConfig === 'Mongoose')
-{
-    // @ts-ignore
-    container.register<IItemRepository>(REPOSITORIES.IItemRepository, { useFactory: instanceCachingFactory((c: DependencyContainer) =>
-    {
-        let repository: IBaseRepository<unknown> = new ItemMongooseRepository();
+{{#ifEquals orm "Mongoose" }}
+	// @ts-ignore
+container.register<IItemRepository>(REPOSITORIES.IItemRepository, { useFactory: instanceCachingFactory((c: DependencyContainer) =>
+	{
+		let repository: IBaseRepository<unknown> = new ItemMongooseRepository();
 
-        if (cacheConfig.enable)
-        {
-            const cacheDataAccess: ICacheDataAccess = c.resolve(REPOSITORIES.ICacheDataAccess);
-            repository = new CacheRepository(repository, cacheDataAccess);
-        }
+		if (cacheConfig.enable)
+		{
+			const cacheDataAccess: ICacheDataAccess = c.resolve(REPOSITORIES.ICacheDataAccess);
+			repository = new CacheRepository(repository, cacheDataAccess);
+		}
 
-        return repository;
-    }) }, { lifecycle: Lifecycle.Transient });
-    container.register<INotificationRepository<INotificationDomain>>(REPOSITORIES.INotificationRepository, { useClass: NotificationMongooseRepository }, { lifecycle: Lifecycle.Singleton });
-}
-{{/ifEquals}} {{#ifEquals orm "MikroORM"}}
-if (defaultDbConfig === 'MikroORM')
-{
-    container.register<IItemRepository>(REPOSITORIES.IItemRepository, { useClass: ItemMikroORMRepository }, { lifecycle: Lifecycle.Singleton });
-}
+		return repository;
+	}) }, { lifecycle: Lifecycle.Transient });
+container.register<INotificationRepository<INotificationDomain>>(REPOSITORIES.INotificationRepository, { useClass: NotificationMongooseRepository }, { lifecycle: Lifecycle.Singleton });
 {{/ifEquals}}
-container.register<IAuthRepository>(REPOSITORIES.IAuthRepository, { useClass: AuthSupabaseRepository }, { lifecycle: Lifecycle.Singleton });
 
+{{#ifEquals orm "Mongoose" }}
+container.register<IItemRepository>(REPOSITORIES.IItemRepository, { useClass: ItemMikroORMRepository }, { lifecycle: Lifecycle.Singleton });
+container.register<IAuthRepository>(REPOSITORIES.IAuthRepository, { useClass: AuthSupabaseRepository }, { lifecycle: Lifecycle.Singleton });
+{{/ifEquals}}
 // Shared
 container.register<IEncryption>(FACTORIES.Md5EncryptionStrategy, { useClass: Md5EncryptionStrategy }, { lifecycle: Lifecycle.Singleton });
 
 // Services
 container.register(SERVICES.AuthorizeService, {
-    // @ts-ignore
-    useFactory: instanceCachingFactory((c: DependencyContainer) =>
-    {
-        const authRepository: IAuthRepository  = c.resolve(REPOSITORIES.IAuthRepository);
-        return new AuthorizeSupabaseService(authRepository);
-    })
+	// @ts-ignore
+	useFactory: instanceCachingFactory((c: DependencyContainer) =>
+	{
+		const authRepository: IAuthRepository  = c.resolve(REPOSITORIES.IAuthRepository);
+		return new AuthorizeSupabaseService(authRepository);
+	})
 }, { lifecycle: Lifecycle.Transient });
 
 // Factories
 container.register<DatabaseFactory>(FACTORIES.IDatabaseFactory, {
-    // @ts-ignore
-    useFactory: instanceCachingFactory(() =>
-    {
-        return new DatabaseFactory();
-    })
+	// @ts-ignore
+	useFactory: instanceCachingFactory(() =>
+	{
+		return new DatabaseFactory();
+	})
 }, { lifecycle: Lifecycle.Transient });
 
 export default container;
