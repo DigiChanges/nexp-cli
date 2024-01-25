@@ -92,13 +92,6 @@ const createProject = async() =>
                       await copyDomainFiles(answers, tmpDir);
                   }
               },
-              {
-                  title: 'Clean Domain Files',
-                  task: async() =>
-                  {
-                      await cleanDomains(answers, tmpDir);
-                  }
-              },
 							{
 									title: 'Copy Index Files',
 									task: async() =>
@@ -112,6 +105,13 @@ const createProject = async() =>
 									{
 											await copyRootFiles(answers, tmpDir);
 									}
+							},
+							{
+								title: 'Clean Domain Files',
+								task: async() =>
+								{
+									await cleanDomains(answers, tmpDir);
+								}
 							},
 							{
 									title: 'Set .env file',
