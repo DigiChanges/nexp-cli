@@ -1,72 +1,114 @@
-# Nexp-cli [![NPM version][npm-image]][npm-url]
+<h1 align="center">
+    NExp-CLI
+</h1>
 
-> This CLI is made to be able to quickly create the NExp(https://github.com/DigiChanges/node-experience) boilerplate with all the content you want it to have.
-> 
-> It allows you to choose between Mongoose, TypeORM and MikroORM when it comes to database persistence. In addition, you can also choose between Koa and Express for the HTTP library.
-> 
-> This tool allows you to use NExp without the need to modify the code.
+_This CLI is made to be able to quickly create the [NExp](https://github.com/DigiChanges/node-experience) boilerplate with all the content you want it to have.
+It allows you to choose between Mongoose and MikroORM when it comes to database persistence.
+This tool allows you to use NExp without the need to modify the code._
 
-## Installation
+<h4 align="center">
+  <a href="https://github.com/DigiChanges/nexp-cli/blob/master/.github/workflows/release.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/DigiChanges/nexp-cli/release.yml?branch=master&label=pipeline&style=flat-square" alt="continuous integration" style="height: 20px;">
+  </a>
+  <a href="https://github.com/DigiChanges/nexp-cli/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors-anon/DigiChanges/nexp-cli?color=yellow&style=flat-square" alt="contributors" style="height: 20px;">
+  </a>
+  <a href="./LICENSE.txt">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license" alt="license" style="height: 20px;">
+  </a>
+  <a href="./LICENSE.txt">
+    <img src="https://img.shields.io/npm/v/nexp-cli.svg?style=flat-square&label=npm" alt="license" style="height: 20px;">
+  </a>
+  <br>
+</h4>
 
-First, install nexp-cli using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+# Pre-requisites
+
+Before you begin, ensure that you have the following installed on your machine:
+
+Node.js: Make sure you have Node.js installed. You can download it from [Official Web](nodejs.org).
+
+NPM (Node Package Manager): npm comes bundled with Node.js.
+
+Docker : [Official Web](https://www.docker.com/)
+
+Docker Compose :  [Compose V2](https://docs.docker.com/compose/install/)
+
+
+# Installation
+
+First, install nexp-cli using [npm](https://www.npmjs.com/)
 
 ```bash
 npm install -g nexp-cli
 ```
 
-Then generate your new project:
+
+## Options
+
+| Options |    |
+|--- | --- |
+| create | initiate project creation |
+
+
+## Available ORM
+
+NExp-cli provides support for two Object-Relational Mapping (ORM) frameworks:
+
+| ORM | Database |
+| --- | --- |
+| Mongoose | MongoDB |
+| MykroORM | Postgres |
+
+
+
+## Usage
+
+
+## Creating a New Project
+
+Use the following command to initiate project creation.
 
 ```bash
 nexp-cli create
 ```
 
-## Step by Step
-#### First of all install nexp cli package globally.
+After running the above command, follow these steps:
 
-![1.png](images/1.png) 
 
-#### Currently, there is a `create` command call, in the future more commands will be added.
+- Write the name of the project.
+- Choose the ORM.
+- And wait for each action to complete.
 
-![2.png](images/2.png)
+# Launching NExp :rocket:
 
-#### Write the name of the project.
+## Environment file
 
-![3.png](images/3.png)
+Copy `.env.dev` to `.env`
 
-#### Choose the ORM.
+## Install dependencies
 
-![4.png](images/4.png)
+To install dependencies, you may choose one of the following methods
 
-#### Choose the HTTP library.
+### npm
 
-![5.png](images/5.png)
+`npm install`
 
-#### And wait for each action to complete.
+### yarn
 
-![6.png](images/6.png)
+`yarn install`
 
-#### Copy .env.dev to .env and install dependencies with yarn or npm.
 
-![7.png](images/7.png)
+## Starting containers with Docker
 
-#### Execute `make dev` command or `STAGE=dev docker-compose up --build -d` to create docker containers.
+To run your application using Docker, follow these steps to start the containers:
 
-* Node
-* DB
-* Redis
-* Mail
-* Minio
+- Execute `make dev` command or `STAGE=dev docker-compose up --build -d`
 
-![8.png](images/8.png)
 
-#### And it's ready to code.
+## NEXT
 
-![9.png](images/9.png)
-
-## Next
-* Choose more HTTP libs
-* Possibility to choose between database drivers such as postgres, mysql etc.
-* Creation of entire domains
+- Creation of entire domains
 
 ## Docs
 
@@ -80,5 +122,3 @@ nexp-cli create
 
 MIT © [Nathan Russo]()
 
-[npm-image]: https://badge.fury.io/js/generator-nexp-cli.svg
-[npm-url]: https://npmjs.org/package/generator-nexp-cli
