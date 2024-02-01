@@ -34,6 +34,7 @@ Docker : [Official Web](https://www.docker.com/)
 
 Docker Compose :  [Compose V2](https://docs.docker.com/compose/install/)
 
+PNPM : Make sure you have PNPM installed. [Official Web](https://pnpm.io/es/)
 
 # Installation
 
@@ -88,15 +89,11 @@ Copy `.env.dev` to `.env`
 
 ## Install dependencies
 
-To install dependencies, you may choose one of the following methods
+To install dependencies, use `pnpm`.
 
-### npm
-
-`npm install`
-
-### yarn
-
-`yarn install`
+```bash
+pnpm install
+```
 
 
 ## Starting containers with Docker
